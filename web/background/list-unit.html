@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+</head>
+<body>
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder">单位管理</strong></div>
+        <div class="padding border-bottom">
+            <ul class="search" style="padding-left:10px;">
+                <li> <a class="button border-main icon-plus-square-o" href="add-unit.html">新增单位</a> </li>
+
+                <table class="table table-hover text-center">
+                    <tr>
+                        <th width="25%">序号</th>
+                        <th width="25%">单位名称</th>
+                        <th width="25%">最小增量</th>
+                        <th width="25%">操作</th>
+                    </tr>
+                    <tbody name="list" id="tt">
+                    <tr>
+                        <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
+                        <td width="10%"><img src="images/11.jpg" alt="" width="70" height="50" /></td>
+                        <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
+                        <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span>解除</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span>禁用</a> </div></td>
+                    </tr>
+                    </tbody>
+                 </table>
+            </ul>
+        </div>
+         </div>
+    </div>
+</body>
+</html>
