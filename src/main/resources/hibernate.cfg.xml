@@ -4,8 +4,18 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url"/>
-        <property name="connection.driver_class"/>
+        <property name="connection.url">jdbc:mysql://localhost:3306/secondproject</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <mapping class="com.qy.domain.AdminEntity"/>
+        <mapping class="com.qy.domain.DetailsEntity"/>
+        <mapping class="com.qy.domain.EvaluationEntity"/>
+        <mapping class="com.qy.domain.GetgoodEntity"/>
+        <mapping class="com.qy.domain.GoodsEntity"/>
+        <mapping class="com.qy.domain.OrderEntity"/>
+        <mapping class="com.qy.domain.ProductEntity"/>
+        <mapping class="com.qy.domain.TradeEntity"/>
+        <mapping class="com.qy.domain.UnitEntity"/>
+        <mapping class="com.qy.domain.UserEntity"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 
