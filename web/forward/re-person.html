@@ -29,6 +29,36 @@
                 $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
             });
         });
+        var path="/"+location.pathname.split("/")[1];
+       function reUser () {
+           var myform = new FormData();
+           myform.append('uIcon1', $('#uIcon')[0].files[0]);
+           myform.append('uPwd', $('#uPwd').val());
+           myform.append('uPhone', $('#uPhone').val());
+           myform.append('uName', $('#uName').val());
+
+           $.ajax({
+               url: path + "/FwUser/reUser",
+               type: "POST",
+               data: myform,
+               cache: false,
+               processData: false,
+               contentType: false,
+               success: function (data) {
+                   alert(data);
+                   if (data == 1) {
+                       window.location.href = "index.html";
+                   } else {
+                       alert("修改失败");
+                   }
+               },
+               error: function (data) {
+                   alert("修改失败！");
+               }
+
+           });
+       }
+
     </script>
     <!-- start-smoth-scrolling -->
 </head>
@@ -123,10 +153,10 @@
 
                     </div>
                     <div class="form">
-                        修改名字<input type="text" name="uname">
-                        修改密码<input type="text" name="upwd">
-                        修改电话<input type="text" name="uphone">
-                        上传头像<input type="file" name="uicon">
+                        修改名字<input type="text" id="uName" name="uname">
+                        修改密码<input type="text" id="uPwd" name="upwd">
+                        修改电话<input type="text" id="uPhone" name="uphone">
+                        上传头像<input type="file" id="uIcon" name="uicon">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -137,7 +167,7 @@
                         <!-- -。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。 -->
                         <!-- <form action="#" method="post"> -->
 
-                        <a href=""> <input type="button" value="确认修改"></a>
+                       <input type="button" onclick="reUser()" value="确认修改">
 
 
 
@@ -181,7 +211,7 @@
         );
     });
 </script>
-<script type="text/javascript" id="snipcart" src="js/snipcart.js" data-api-key="ZGQxNzVjZTItOWRmNS00YjJhLTlmNGUtMDE4NjdiY2RmZGNj"></script>
+<script type="text/javascript" id="snipcart"  data-api-key="ZGQxNzVjZTItOWRmNS00YjJhLTlmNGUtMDE4NjdiY2RmZGNj"></script>
 <!-- here stars scrolling icon -->
 <script type="text/javascript">
     $(document).ready(function() {

@@ -29,6 +29,32 @@
                 $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
             });
         });
+
+        var path = "/" + location.pathname.split("/")[1];
+        function toLogin() {
+            $.get(path+"/FwUser/toLogin",{"uName":$('#uName').val(),"uPwd":$('#uPwd').val()},
+                function (data){
+                    if(data==1){
+                        window.location.href="index.html";
+                    }else if(data==2){
+                        alert("账户已禁用，请联系客服!");
+                    }else if(data==3){
+                        alert("密码错误!");
+                    }else{
+                        alert("用户名不存在！")
+                    }
+                });
+        }
+        function register() {
+            $.get(path+"/FwUser/register",{"uName":$('#uName1').val(),"uPwd":$('#uPwd1').val(),"uPhone":$('#uPhone').val()},
+                function (data){
+                    if(data==1){
+                        window.location.href="login.html";
+                    }else{
+                        alert("用户名已存在！")
+                    }
+                });
+        }
 	</script>
 	<!-- start-smoth-scrolling -->
 </head>
@@ -123,20 +149,20 @@
 				  </div>
 				  <div class="form">
 					<h2>登到你的账户</h2>
-					<form action="#" method="post">
-					  <input type="text" name="Username" placeholder="用户名" required=" ">
-					  <input type="password" name="Password" placeholder="密码" required=" ">
-					  <input type="submit" value="登录">
-					</form>
+
+					  <input type="text" name="Username" id="uName" placeholder="用户名" required=" ">
+					  <input type="password" name="Password" id="uPwd" placeholder="密码" required=" ">
+					  <input type="submit"  onclick="toLogin()" value="登录">
+
 				  </div>
 				  <div class="form">
 					<h2>创建你的账户</h2>
-					<form action="#" method="post">
-					  <input type="text" name="Username" placeholder="用户名" required=" ">
-					  <input type="password" name="Password" placeholder="密码" required=" ">
-					  <input type="text" name="Phone Number" placeholder="电话" required=" ">
-					  <input type="submit" value="注册">
-					</form>
+
+					  <input type="text" name="Username" id="uName1" placeholder="用户名" required=" ">
+					  <input type="password" name="Password" id="uPwd1" placeholder="密码" required=" ">
+					  <input type="text" name="Phone Number" id="uPhone" placeholder="电话" required=" ">
+					  <input type="submit" onclick="register()" value="注册">
+
 				  </div>
 				  <div class="cta"><a href="#">忘记密码了吗?</a></div>
 				</div>
@@ -179,7 +205,7 @@ $(document).ready(function(){
     );
 });
 </script>
-<script type="text/javascript" id="snipcart" src="js/snipcart.js" data-api-key="ZGQxNzVjZTItOWRmNS00YjJhLTlmNGUtMDE4NjdiY2RmZGNj"></script>
+<script type="text/javascript" id="snipcart"  data-api-key="ZGQxNzVjZTItOWRmNS00YjJhLTlmNGUtMDE4NjdiY2RmZGNj"></script>
 <!-- here stars scrolling icon -->
 	<script type="text/javascript">
 		$(document).ready(function() {
