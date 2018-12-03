@@ -15,7 +15,9 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 修改会员密码</strong></div>
   <div class="body-content">
-    <div  class="form-x" >
+
+<div class="form-x">
+
       <div class="form-group">
         <div class="label">
           <label for="sitename">管理员帐号：</label>
@@ -39,7 +41,7 @@
           <label for="sitename">新密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />         
+          <input type="password" class="input w50" id="newpass" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />
         </div>
       </div>
       <div class="form-group">
@@ -47,7 +49,7 @@
           <label for="sitename">确认新密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" name="renewpass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />          
+          <input type="password" class="input w50" id="renewpass" name="renewpass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />
         </div>
       </div>
       
@@ -56,10 +58,39 @@
           <label></label>
         </div>
         <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>   
+          <button class="button bg-main icon-check-square-o" type="submit" id="changepwd"> 提交</button>
         </div>
-      </div>      
+
+      </div>
+
     </div>
   </div>
 </div>
-</body></html>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var path = "/" + location.pathname.split("/")[1];
+
+        $("#changepwd").click(function () {
+            $.get(path+"/login/isaPwd",{"oldpwd":$("#mpass").val(),"newpwd":$("#newpass").val(),"repwd":$("#newpass").val()},
+                function (data) {
+
+
+                    if(data===1){
+                        alert("原密码输入错误");
+                    }else if(data===2) {
+                        alert("新密码不能和当前密码相同");
+                    // }else if(data===3) {
+                    //     alert("两次输入不一致");
+                    }else{
+                        alert("密码修改成功，下次登录请用新密码！");
+
+                        // window.location.href=path+"/background/index.html";
+                    }
+                },"JSON");
+        });
+    });
+
+
+</script>
+</html>
