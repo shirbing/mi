@@ -1,10 +1,13 @@
 package com.qy.domain;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "order", schema = "secondproject", catalog = "")
+@DynamicInsert(value = true)
 public class OrderEntity {
     private int oId;
     private int oNum;
@@ -25,7 +28,6 @@ public class OrderEntity {
 
     @Id
     @Column(name = "o_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getoId() {
         return oId;
     }

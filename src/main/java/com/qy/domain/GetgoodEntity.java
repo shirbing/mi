@@ -1,9 +1,12 @@
 package com.qy.domain;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "getgood", schema = "secondproject", catalog = "")
+@DynamicInsert(value = true)
 public class GetgoodEntity {
     private int ggId;
     private String ggName;
@@ -14,7 +17,6 @@ public class GetgoodEntity {
 
     @Id
     @Column(name = "gg_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getGgId() {
         return ggId;
     }

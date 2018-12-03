@@ -1,13 +1,17 @@
 package com.qy.domain;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "goods", schema = "secondproject", catalog = "")
+@DynamicInsert(value = true)
 public class GoodsEntity {
     private int gId;
-    private int pId;
-    private String gCover;
+    private int pNum;
+    private String gName;
+    private String gNum;
     private String gImg;
     private String gDetail;
     private double gPrice;
@@ -20,7 +24,6 @@ public class GoodsEntity {
 
     @Id
     @Column(name = "g_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getgId() {
         return gId;
     }
@@ -30,23 +33,33 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "p_id")
-    public int getpId() {
-        return pId;
+    @Column(name = "p_num")
+    public int getpNum() {
+        return pNum;
     }
 
-    public void setpId(int pId) {
-        this.pId = pId;
+    public void setpNum(int pNum) {
+        this.pNum = pNum;
     }
 
     @Basic
-    @Column(name = "g_cover")
-    public String getgCover() {
-        return gCover;
+    @Column(name = "g_name")
+    public String getgName() {
+        return gName;
     }
 
-    public void setgCover(String gCover) {
-        this.gCover = gCover;
+    public void setgName(String gName) {
+        this.gName = gName;
+    }
+
+    @Basic
+    @Column(name = "g_num")
+    public String getgNum() {
+        return gNum;
+    }
+
+    public void setgNum(String gNum) {
+        this.gNum = gNum;
     }
 
     @Basic
@@ -147,12 +160,13 @@ public class GoodsEntity {
         GoodsEntity that = (GoodsEntity) o;
 
         if (gId != that.gId) return false;
-        if (pId != that.pId) return false;
+        if (pNum != that.pNum) return false;
         if (Double.compare(that.gPrice, gPrice) != 0) return false;
         if (Double.compare(that.gOffer, gOffer) != 0) return false;
         if (gInventory != that.gInventory) return false;
         if (Double.compare(that.gDiscount, gDiscount) != 0) return false;
-        if (gCover != null ? !gCover.equals(that.gCover) : that.gCover != null) return false;
+        if (gName != null ? !gName.equals(that.gName) : that.gName != null) return false;
+        if (gNum != null ? !gNum.equals(that.gNum) : that.gNum != null) return false;
         if (gImg != null ? !gImg.equals(that.gImg) : that.gImg != null) return false;
         if (gDetail != null ? !gDetail.equals(that.gDetail) : that.gDetail != null) return false;
         if (gState != null ? !gState.equals(that.gState) : that.gState != null) return false;
@@ -167,8 +181,9 @@ public class GoodsEntity {
         int result;
         long temp;
         result = gId;
-        result = 31 * result + pId;
-        result = 31 * result + (gCover != null ? gCover.hashCode() : 0);
+        result = 31 * result + pNum;
+        result = 31 * result + (gName != null ? gName.hashCode() : 0);
+        result = 31 * result + (gNum != null ? gNum.hashCode() : 0);
         result = 31 * result + (gImg != null ? gImg.hashCode() : 0);
         result = 31 * result + (gDetail != null ? gDetail.hashCode() : 0);
         temp = Double.doubleToLongBits(gPrice);
