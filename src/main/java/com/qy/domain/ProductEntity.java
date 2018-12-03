@@ -1,9 +1,12 @@
 package com.qy.domain;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "product", schema = "secondproject", catalog = "")
+@DynamicInsert(value = true)
 public class ProductEntity {
     private int pId;
     private String pStyle;
@@ -12,10 +15,10 @@ public class ProductEntity {
     private String pPackage;
     private int pWeight;
     private String pTryeat;
+    private String pUnit;
 
     @Id
     @Column(name = "p_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getpId() {
         return pId;
     }
@@ -84,6 +87,16 @@ public class ProductEntity {
         this.pTryeat = pTryeat;
     }
 
+    @Basic
+    @Column(name = "p_unit")
+    public String getpUnit() {
+        return pUnit;
+    }
+
+    public void setpUnit(String pUnit) {
+        this.pUnit = pUnit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,6 +111,7 @@ public class ProductEntity {
         if (pName != null ? !pName.equals(that.pName) : that.pName != null) return false;
         if (pPackage != null ? !pPackage.equals(that.pPackage) : that.pPackage != null) return false;
         if (pTryeat != null ? !pTryeat.equals(that.pTryeat) : that.pTryeat != null) return false;
+        if (pUnit != null ? !pUnit.equals(that.pUnit) : that.pUnit != null) return false;
 
         return true;
     }
@@ -111,6 +125,7 @@ public class ProductEntity {
         result = 31 * result + (pPackage != null ? pPackage.hashCode() : 0);
         result = 31 * result + pWeight;
         result = 31 * result + (pTryeat != null ? pTryeat.hashCode() : 0);
+        result = 31 * result + (pUnit != null ? pUnit.hashCode() : 0);
         return result;
     }
 }

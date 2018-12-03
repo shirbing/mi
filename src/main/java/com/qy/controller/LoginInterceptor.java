@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        Object admin = request.getSession().getAttribute("ADMIN_SESSION_KEY");
+        Object adminEntity = request.getSession().getAttribute("ADMIN_SESSION_KEY");
         String path = request.getContextPath();
         String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
         System.out.println(basePath);
-        if (admin == null) {
-            System.out.println("尚未登录，调到登录页面");
+        if (adminEntity == null) {
+            System.out.println("尚未登录，转到登录页面");
             response.sendRedirect(basePath+"background/login.html");
             return false;
         }

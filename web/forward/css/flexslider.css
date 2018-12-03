@@ -121,26 +121,30 @@ html[xmlns] .slides {display: block;}
 	
 }
 @media screen and (max-width:667px) {
-	
-@media screen and (max-width: 600px) {
-	
-}
-@media screen and (max-width: 480px) {
-	section.slider {
-		padding-top: 0%;
-	}
-	.flexslider {
-		padding: 0px 0px;
-	}
-	.flex-control-nav {
-		left: 44.5%;
-	}
-}
-@media screen and (max-width: 414px){
-	
-@media screen and (max-width: 320px) {
-	section.slider {
-		padding-top: 0%;
-	}
-	
+
+    @media screen and (max-width: 600px) {
+
+    }
+    @media screen and (max-width: 480px) {
+        section.slider {
+            padding-top: 0%;
+        }
+
+        .flexslider {
+            padding: 0px 0px;
+        }
+
+        .flex-control-nav {
+            left: 44.5%;
+        }
+    }
+    @media screen and (max-width: 414px) {
+
+        @media screen and (max-width: 320px) {
+            section.slider {
+                padding-top: 0%;
+            }
+
+        }
+    }
 }

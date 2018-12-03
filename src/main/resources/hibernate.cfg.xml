@@ -16,6 +16,7 @@
         <mapping class="com.qy.domain.TradeEntity"/>
         <mapping class="com.qy.domain.UnitEntity"/>
         <mapping class="com.qy.domain.UserEntity"/>
+
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

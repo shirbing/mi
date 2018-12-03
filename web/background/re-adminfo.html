@@ -19,10 +19,10 @@
             <form method="post" class="form-x" action="">
                 <div class="form-group">
                     <div class="label">
-                        <label>账号：</label>
+                        <label>昵称：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写账号"  />
+                        <input type="text" class="input w50" name="url" data-validate="required:请填写账号" id="aAccount" />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                     <label>姓名：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" name="url" data-validate="required:请填写姓名"  />
+                    <input type="text" class="input w50" name="url" data-validate="required:请填写姓名" id="aName" />
                     <div class="tips"></div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                         <label></label>
                     </div>
                     <div class="field">
-                        <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                        <button class="button bg-main icon-check-square-o" type="submit" id="changeaMsg"> 提交</button>
                     </div>
                 </div>
             </form>
@@ -48,4 +48,18 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var path = "/" + location.pathname.split("/")[1];
+
+        $("#changeaMsg").click(function () {
+            $.get(path+"/login/changeaMsg",{"aAccount":$("#aAccount").val(),"aName":$("#aName").val()},
+                function (data) {
+                    alert(data);
+                },"JSON");
+        });
+    });
+
+
+</script>
 </html>
