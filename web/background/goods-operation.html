@@ -8,78 +8,315 @@
     <title></title>
     <link rel="stylesheet" href="css/pintuer.css">
     <link rel="stylesheet" href="css/admin.css">
-    <script src="js/jquery.js"></script>
+    <!--<script src="js/jquery.js"></script>-->
+    <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/pintuer.js"></script>
+    <script type="text/javascript">
+        var currentPage=1;
+        var path = "/" + location.pathname.split("/")[1];
+        function listgoods() {
+            $.get(/*path+"/BgGoods/findAllGoods",*/
+                path+"/BgGoods/changeSearchGoods",
+                {"gTryeat":$('#iseat').val(),"gState":$('#isup').val(),"gRecommend":$('#istj').val(),"pStyle":$('#goodstype').val(),"currentPage":currentPage},
+                function (data) {
+                    console.log(data);
+                    if(data.length<3){
+                        addAtt();
+                    }else{
+                        removeAtt();
+                    }
+                    remove();
+                    ad(data);
+                }
+            );
+        }
+
+        function ad(data) {
+            $.each(JSON.parse(data),function(i,obj){
+                if(obj.gRecommend=="否"&&obj.gState=="下架"){
+                    $("#tt").append(
+                        '<tr>'+
+                        '<td>'+obj.gNum+'</td>'+
+                        '<td width="10%"><img src='+obj.gImg+' alt="商品图片" width="70" height="50" /></td>'+
+                        '<td>'+obj.pNum+'</td>'+
+                        '<td>'+obj.gName+'</td>'+
+                        '<td>'+obj.gInventory+'</td>'+
+                        '<td>'+'</td>'+
+                        '<td>'+obj.gState+'</td>'+
+                        '<td>'+obj.gRecommend+'</td>'+
+                        '<td>'+obj.gTryeat+'</td>'+
+                        '<td> <div class="button-group"> <a class="button border-main" href="edit-goods.html?gNum='+obj.gNum+'&pNum='+obj.pNum+'&gName='+obj.gName+'">'+
+                        '<span class="icon-edit">'+
+                        '</span>编辑</a>'+
+                        '<a class="button border-main"  href="javascript:void(0)" onclick="recommendGoods('+obj.gNum+')">'+
+                        '<span class="icon-edit"></span>推荐</a>'+
+                        '<a class="button border-main"  href="javascript:void(0)" onclick="upGoods('+obj.gNum+')">'+
+                        '<span class="icon-edit"></span>上架</a>'+
+                        '<a class="button border-red" href="javascript:void(0)" onclick="deleteGoods('+obj.gNum+')">'+
+                        '<span class="icon-trash-o"></span>删除</a>'+
+                        '</div>'+
+                        '</td>'+
+                        '</tr>');
+                }else if(obj.gRecommend=="否"&&obj.gState=="上架"){
+                    $("#tt").append(
+                        '<tr>'+
+                        '<td>'+obj.gNum+'</td>'+
+                        '<td width="10%"><img src='+obj.gImg+' alt="商品图片" width="70" height="50" /></td>'+
+                        '<td>'+obj.pNum+'</td>'+
+                        '<td>'+obj.gName+'</td>'+
+                        '<td>'+obj.gInventory+'</td>'+
+                        '<td>'+'</td>'+
+                        '<td>'+obj.gState+'</td>'+
+                        '<td>'+obj.gRecommend+'</td>'+
+                        '<td>'+obj.gTryeat+'</td>'+
+                        '<td> <div class="button-group"> <a class="button border-main" href="edit-goods.html?gNum='+obj.gNum+'&pNum='+obj.pNum+'&gName='+obj.gName+'">'+
+                        '<span class="icon-edit">'+
+                        '</span>编辑</a>'+
+                        '<a class="button border-main" href="javascript:void(0)" onclick="recommendGoods('+obj.gNum+')">'+
+                        '<span class="icon-edit"></span>推荐</a>'+
+                        '<a class="button border-main" href="javascript:void(0)" onclick="lowGoods('+obj.gNum+')">'+
+                        '<span class="icon-edit"></span>下架</a>'+
+                        '<a class="button border-red" href="javascript:void(0)" onclick="deleteGoods('+obj.gNum+')">'+
+                        '<span class="icon-trash-o"></span>删除</a>'+
+                        '</div>'+
+                        '</td>'+
+                        '</tr>');
+                }else if(obj.gRecommend=="是"&&obj.gState=="上架"){
+                    $("#tt").append(
+                        '<tr>'+
+                        '<td>'+obj.gNum+'</td>'+
+                        '<td width="10%"><img src='+obj.gImg+' alt="商品图片" width="70" height="50" /></td>'+
+                        '<td>'+obj.pNum+'</td>'+
+                        '<td>'+obj.gName+'</td>'+
+                        '<td>'+obj.gInventory+'</td>'+
+                        '<td>'+'</td>'+
+                        '<td>'+obj.gState+'</td>'+
+                        '<td>'+obj.gRecommend+'</td>'+
+                        '<td>'+obj.gTryeat+'</td>'+
+                        '<td> <div class="button-group"> <a class="button border-main" href="edit-goods.html?gNum='+obj.gNum+'&pNum='+obj.pNum+'&gName='+obj.gName+'">'+
+                        '<span class="icon-edit">'+
+                        '</span>编辑</a>'+
+                        '<a class="button border-main" href="javascript:void(0)" onclick="noRecommendGoods('+obj.gNum+')">'+
+                        '<span class="icon-edit"></span>不推荐</a>'+
+                        '<a class="button border-main" href="javascript:void(0)" onclick="lowGoods('+obj.gNum+')">'+
+                        '<span class="icon-edit"></span>下架</a>'+
+                        '<a class="button border-red" href="javascript:void(0)" onclick="deleteGoods('+obj.gNum+')">'+
+                        '<span class="icon-trash-o"></span>删除</a>'+
+                        '</div>'+
+                        '</td>'+
+                        '</tr>');
+                }else{
+                    $("#tt").append(
+                        '<tr>'+
+                        '<td>'+obj.gNum+'</td>'+
+                        '<td width="10%"><img src='+obj.gImg+' alt="商品图片" width="70" height="50" /></td>'+
+                        '<td>'+obj.pNum+'</td>'+
+                        '<td>'+obj.gName+'</td>'+
+                        '<td>'+obj.gInventory+'</td>'+
+                        '<td>'+'</td>'+
+                        '<td>'+obj.gState+'</td>'+
+                        '<td>'+obj.gRecommend+'</td>'+
+                        '<td>'+obj.gTryeat+'</td>'+
+                        '<td> <div class="button-group"> <a class="button border-main" href="edit-goods.html?gNum='+obj.gNum+'&pNum='+obj.pNum+'&gName='+obj.gName+'">'+
+                        '<span class="icon-edit">'+
+                        '</span>编辑</a>'+
+                        '<a class="button border-main" href="javascript:void(0)" onclick="noRecommendGoods('+obj.gNum+')">'+
+                        '<span class="icon-edit"></span>不推荐</a>'+
+                        '<a class="button border-main" href="javascript:void(0)" onclick="upGoods('+obj.gNum+')">'+
+                        '<span class="icon-edit""></span>上架</a>'+
+                        '<a class="button border-red" href="javascript:void(0)" onclick="deleteGoods('+obj.gNum+')">'+
+                        '<span class="icon-trash-o"></span>删除</a>'+
+                        '</div>'+
+                        '</td>'+
+                        '</tr>');
+                }
+
+            });
+        }
+
+        function changesearch() {
+            if(   ($('#iseat').val()==""&&$('#isup').val()=="")&&($('#goodstype').val()==""&&$('#istj').val()=="")) {
+                window.location.href="goods-operation.html";
+            }else{
+                $.get(
+                    path+"/BgGoods/changeSearchGoods",
+                    {"gTryeat":$('#iseat').val(),"gState":$('#isup').val(),"gRecommend":$('#istj').val(),"pStyle":$('#goodstype').val(),"currentPage":currentPage},
+                    function (data) {
+                        console.log(data);
+                        if(data.length<3){
+                            addAtt();
+                        }else{
+                            removeAtt();
+                        }
+                        remove();
+                        ad(data);
+                    }
+                );
+            }
+
+        }
+        function search() {
+
+        }
+
+
+        //删除当前已经存在的元素
+        function remove(){
+            var tb=document.getElementsByClassName("tt")[0];
+            var leng=tb.rows.length;
+            for (var i= 0; i <leng;i++) {
+                tb.deleteRow(0);
+            }
+        }
+        //下一页
+        function nextPage(){
+            //让当前页数+1；
+            currentPage++;
+            //请求网络
+            listgoods();
+        }
+
+        function previousPage(){
+            //1判断currentPage==1;
+            if(currentPage==1)return;
+            //currentPage-1;
+            currentPage--;
+            //网络请求
+            listgoods();
+        }
+        //添加
+        function addAtt(){
+            var btn=document.getElementsByClassName("next")[0];
+            btn.setAttribute("disabled", "disabled");
+        }
+        //移除
+        function removeAtt(){
+            var btn=document.getElementsByClassName("next")[0];
+            btn.removeAttribute("disabled");
+        }
+        
+        function deleteGoods(gNum) {
+            $.get(path+"/BgGoods/deleteGoods",{"gNum":gNum},
+                function (data) {
+                    console.log(data);
+                      if(data==1){
+                          window.location.href="goods-operation.html";
+                      }else{
+                          alert("删除失败");
+                      }
+                }
+            );
+        }
+        //上架操作
+        function upGoods(gNum) {
+            $.get(path+"/BgGoods/upGoods",{"gNum":gNum},
+                function (data) {
+                    console.log(data);
+                    if(data==1){
+                        window.location.href="goods-operation.html";
+                    }else{
+                        alert("上架失败");
+                    }
+                }
+            );
+        }
+        //下架操作
+        function lowGoods(gNum) {
+            $.get(path+"/BgGoods/lowGoods",{"gNum":gNum},
+                function (data) {
+                    console.log(data);
+                    if(data==1){
+                        window.location.href="goods-operation.html";
+                    }else{
+                        alert("下架失败");
+                    }
+                }
+            );
+        }
+        //推荐操作
+        function recommendGoods(gNum) {
+            $.get(path+"/BgGoods/recommendGoods",{"gNum":gNum},
+                function (data) {
+                    console.log(data);
+                    if(data==1){
+                        window.location.href="goods-operation.html";
+                    }else{
+                        alert("推荐失败");
+                    }
+                }
+            );
+        }
+        //不推荐操作
+        function noRecommendGoods(gNum) {
+            $.get(path+"/BgGoods/noRecommendGoods",{"gNum":gNum},
+                function (data) {
+                    console.log(data);
+                    if(data==1){
+                        window.location.href="goods-operation.html";
+                    }else{
+                        alert("不推荐失败");
+                    }
+                }
+            );
+        }
+
+    </script>
 </head>
-<body>
-<form method="post" action="" id="listform">
+<body onload="listgoods()">
+<div id="listform">
     <div class="panel admin-panel">
         <div class="panel-head"><strong class="icon-reorder">商品管理</strong></div>
         <div class="padding border-bottom">
             <ul class="search" style="padding-left:10px;">
                 <li> <a class="button border-main icon-plus-square-o" href="add-goods.html">新增商品</a> </li>
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="s_ishome"  onchange="changesearch()" style="width:76px;margin-left: 10px; height:30px; display:inline-block ">
-                        <option value="1">商品编号</option>
-                        <option value="0">商品名称</option>
+                    <select name="iseat" id="iseat" onchange="changesearch()"  style="width:76px;margin-left: 10px; height:30px;display:inline-block">
+                        <option value="" >是否试吃</option>
+                        <option value="是">是</option>
+                        <option value="否">否</option>
                     </select>
-                   &nbsp;&nbsp;&nbsp;
-                    <select name="s_istop"  onchange="changesearch()"  style="width:76px;margin-left: 10px; height:30px;display:inline-block">
-                        <option value="">产品名称</option>
-                        <option value="0">试吃商品</option>
-                        <option value="1">有机米商品</option>
+                   <!-- &nbsp;&nbsp;&nbsp;
+                    <select id="goodstype"  onchange="changesearch()"  style="width:76px;margin-left: 10px; height:30px;display:inline-block">
+                        <option value="">产品类型</option>
+                        <option value="有机米">有机米</option>
+                        <option value="富硒米">富硒米</option>
+                    </select>-->
+                    &nbsp;&nbsp;&nbsp;
+                    <select id="isup"  onchange="changesearch()"  style="width:76px;margin-left: 10px; height:30px;display:inline-block">
+                        <option value="" >上架状态</option>
+                        <option value="上架">上架</option>
+                        <option value="下架">下架</option>
                     </select>
                     &nbsp;&nbsp;&nbsp;
-                    <select name="s_istop"  onchange="changesearch()"  style="width:76px;margin-left: 10px; height:30px;display:inline-block">
-                        <option value="">商品类型</option>
-                        <option value="0">有机米</option>
-                        <option value="1">富硒米</option>
-                    </select>
-                    &nbsp;&nbsp;&nbsp;
-                    <select name="s_istop"  onchange="changesearch()"  style="width:76px;margin-left: 10px; height:30px;display:inline-block">
-                        <option value="">上架状态</option>
-                        <option value="0">上架</option>
-                        <option value="1">下架</option>
-                    </select>
-                    &nbsp;&nbsp;&nbsp;
-                    <select name="s_istop"  onchange="changesearch()"  style="width:76px;margin-left: 10px; height:30px;display:inline-block">
-                        <option value="">推荐状态</option>
-                        <option value="0">推荐</option>
-                        <option value="1">未推荐</option>
+                    <select id="istj"  onchange="changesearch()"  style="width:76px;margin-left: 10px; height:30px;display:inline-block">
+                        <option value="" >是否推荐</option>
+                        <option value="是">是</option>
+                        <option value="否">否</option>
                     </select>
                 </li>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <li>
+                <!--<li>
                     <input type="text" placeholder="请输入搜索关键字" name="keywords" class="input" style="width:250px;margin-left: 30px;margin-right: 10px; line-height:17px;display:inline-block " />
-                    <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
+                    <a href="javascript:void(0)" class="button border-main icon-search" onclick="search()" > 搜索</a></li>-->
             </ul>
         </div>
         <table class="table table-hover text-center">
             <tr>
-                <th width="10%">序号</th>
-                <th width="10%">商品编号</th>
-                <th width="10%">产品名称</th>
+                <th width="8%">商品编号</th>
+                <th width="15%">商品图片</th>
+                <th width="10%">产品编号</th>
                 <th width="10%">商品名称</th>
-                <th width="10%">库存量</th>
-                <th width="10%">销量</th>
+                <th width="8%">库存量</th>
+                <th width="8%">销量</th>
                 <th width="10%">上架状态</th>
-                <th width="10%">推荐状态</th>
-                <th width="20%">操作</th>
+                <th width="8%">是否推荐</th>
+                <th width="8%">试吃商品</th>
+                <th width="15%">操作</th>
             </tr>
-            <tbody name="list" id="tt">
-            <tr>
-                <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-                <td width="10%"><img src="images/11.jpg" alt="" width="70" height="50" /></td>
-                <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-                <td><font color="#00CC99">首页</font></td>
-                <td>2016-07-01</td>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span>解除</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span>禁用</a> </div></td>
-            </tr>
+            <tbody name="list" class="tt" id="tt">
+
             </tbody>
-            <tr>
+           <!-- <tr>
                 <td >总共有<span></span>个商品</td>
                 <td> </td>
                 <td> </td>
@@ -89,27 +326,13 @@
                 <td> </td>
                 <td> </td>
                 <td>本页显示<span></span>个商品 </td>
-            </tr>
+            </tr>-->
             <tr>
-                <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <a href="">下一页</a><a href="">尾页</a> </div></td>
+                <td colspan="8"><div class="pagelist"> <button class="previous" onclick="previousPage()">上一页</button>
+                    <button class="next" onclick="nextPage()" style="float: right;">下一页</button></div></td>
             </tr>
         </table>
     </div>
-</form>
-<script type="text/javascript">
-    //搜索
-    function changesearch(){
-
-    }
-
-    //单个删除
-    function del(id,mid,iscid){
-        if(confirm("您确定要删除吗?")){
-
-        }
-    }
-
-
-</script>
+</div>
 </body>
 </html>

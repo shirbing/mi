@@ -1,16 +1,19 @@
 package com.qy.domain;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "unit", schema = "secondproject", catalog = "")
+@DynamicInsert(value = true)
 public class UnitEntity {
     private int uId;
     private String uValue;
+    private String uName;
 
     @Id
     @Column(name = "u_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getuId() {
         return uId;
     }
@@ -29,6 +32,16 @@ public class UnitEntity {
         this.uValue = uValue;
     }
 
+    @Basic
+    @Column(name = "u_name")
+    public String getuName() {
+        return uName;
+    }
+
+    public void setuName(String uName) {
+        this.uName = uName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,6 +51,7 @@ public class UnitEntity {
 
         if (uId != that.uId) return false;
         if (uValue != null ? !uValue.equals(that.uValue) : that.uValue != null) return false;
+        if (uName != null ? !uName.equals(that.uName) : that.uName != null) return false;
 
         return true;
     }
@@ -46,6 +60,7 @@ public class UnitEntity {
     public int hashCode() {
         int result = uId;
         result = 31 * result + (uValue != null ? uValue.hashCode() : 0);
+        result = 31 * result + (uName != null ? uName.hashCode() : 0);
         return result;
     }
 }

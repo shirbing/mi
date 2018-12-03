@@ -9,34 +9,31 @@
     <link rel="stylesheet" href="css/pintuer.css">
     <link rel="stylesheet" href="css/admin.css">
     <script src="js/jquery.js"></script>
+    <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/pintuer.js"></script>
 </head>
-<body>
+<body onload="addNum()">
 <div class="panel admin-panel">
     <div class="panel-head"><strong class="icon-reorder">新增商品</strong></div>
     <div class="panel admin-panel margin-top" id="add">
         <div class="panel-head"><strong><span class="icon-pencil-square-o"></span>添加信息</strong></div>
         <div class="body-content">
-            <form method="post" class="form-x" action="">
+            <div  class="form-x" >
                 <div class="form-group">
                     <div class="label">
                         <label>商品编号：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写商品编号"  />
+                        <input type="text" id="gNum" class="input w50" name="url" data-validate="required:请填写商品编号"  />
                         <div class="tips"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="label">
-                        <label>产品名称：</label>
+                        <label>产品编号：</label>
                     </div>
                     <div class="field">
-                        <select name="cid" class="input w50">
-                            <option value="">请选择</option>
-                            <option value="有机米商品">有机米商品</option>
-                            <option value="试吃商品">试吃商品</option>
-                        </select>
+                        <input type="text" id="pNum" class="input w50" name="url" data-validate="required:请填写产品编号"  />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -45,61 +42,61 @@
                         <label>商品名称：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写商品名称"  />
+                        <input type="text" id="gName" class="input w50" name="url" data-validate="required:请填写商品名称"  />
                         <div class="tips"></div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="label">
-                        <label>商品类型：</label>
-                    </div>
-                    <div class="field">
-                        <select name="cid" class="input w50">
-                            <option value="">请选择</option>
-                            <option value="有机米">有机米</option>
-                            <option value="富硒米">富硒米</option>
-                        </select>
-                        <div class="tips"></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="label">
-                        <label>单品参数：</label>
-                        <hr>
-                    </div>
-                    <div class="field">
-                        <div class="tips"></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="label">
-                        <label>包装：</label>
-                    </div> <br> <br>
-                    <div class="field">
-                        <input type="radio" name="bz" value="jz">精装&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="bz" value="zk">真空包装
-                        <div class="tips"></div>
-                    </div>
-                </div><br>
-                <div class="form-group">
-                    <div class="label">
-                        <label>重量：</label>
-                    </div> <br> <br>
-                    <div class="field">
-                        <input type="radio" name="weit" value="250">250(克)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="weit" value="500">500(克)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="weit" value="1000">1000(克)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="weit" value="2500">2500(克)
-                        <div class="tips"></div>
-                    </div>
-                </div><br>
+                <!--  <div class="form-group">
+                      <div class="label">
+                          <label>商品类型：</label>
+                      </div>
+                      <div class="field">
+                          <select name="cid" class="input w50">
+                              <option value="">请选择</option>
+                              <option value="有机米商品">有机米商品</option>
+                              <option value="富硒米商品">富硒米商品</option>
+                          </select>
+                          <div class="tips"></div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="label">
+                          <label>单品参数：</label>
+                          <hr>
+                      </div>
+                      <div class="field">
+                          <div class="tips"></div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="label">
+                          <label>包装：</label>
+                      </div> <br> <br>
+                      <div class="field">
+                          <input type="radio" id="" name="bz" value="jz">精装&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="radio" name="bz" value="zk">真空包装
+                          <div class="tips"></div>
+                      </div>
+                  </div><br>
+                  <div class="form-group">
+                      <div class="label">
+                          <label>重量：</label>
+                      </div> <br> <br>
+                      <div class="field">
+                          <input type="radio" name="weit" value="250">250(克)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="radio" name="weit" value="500">500(克)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="radio" name="weit" value="1000">1000(克)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="radio" name="weit" value="2500">2500(克)
+                          <div class="tips"></div>
+                      </div>
+                  </div><br>-->
                 <div class="form-group">
                     <div class="label">
                         <label>试吃商品：</label>
                     </div> <br> <br>
                     <div class="field">
-                        <input type="radio" name="eat" value="yes">是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="eat" value="no">否
+                        <input type="radio"  name="eat" value="是">是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio"  name="eat" value="否">否
                         <div class="tips"></div>
                     </div>
                 </div><br>
@@ -108,7 +105,7 @@
                         <label>原价：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写原价"  />
+                        <input type="text" id="gPrice" class="input w50" name="url" data-validate="required:请填写原价"  />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -117,7 +114,7 @@
                         <label>折扣：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url"  />
+                        <input type="text" id="gDiscount" class="input w50" name="url"  />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -126,7 +123,7 @@
                         <label>特价：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写商品特价"  />
+                        <input type="text" id="gOffer" class="input w50" name="url" data-validate="required:请填写商品特价"  />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -135,7 +132,7 @@
                         <label>库存：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写库存"  />
+                        <input type="text" id="gInventory" class="input w50" name="url" data-validate="required:请填写库存"  />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -145,7 +142,7 @@
                         <label>图片：</label>
                     </div>
                     <div class="field">
-                        <input type="file" name="imgsss" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left; width: 105px;"/>
+                        <input type="file" name="imgsss" class="button bg-blue margin-left" id="gImg" value="+ 浏览上传"  style="float:left; width: 105px;"/>
                         <div class="tipss">图片尺寸：1920*500</div>
                     </div>
                 </div>
@@ -154,7 +151,7 @@
                         <label>商品详情：</label>
                     </div>
                     <div class="field">
-                        <textarea type="text" class="input" name="note" style="height:80px;" value=""></textarea>
+                        <textarea type="text" id="gDetail" class="input" name="note" style="height:80px;" value=""></textarea>
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -163,12 +160,74 @@
                         <label></label>
                     </div>
                     <div class="field">
-                        <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                        <button class="button bg-main icon-check-square-o" id="goodsSub1" type="submit"> 提交</button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 </body>
+<script>
+    var path = "/" + location.pathname.split("/")[1];
+    $('#goodsSub1').click(function () {
+        var myform=new FormData();
+        myform.append('gImg1',$('#gImg')[0].files[0]);
+        myform.append('gNum',$('#gNum').val());
+        myform.append('pNum',$('#pNum').val());
+        myform.append('gName',$('#gName').val());
+        myform.append('gPrice',$('#gPrice').val());
+        myform.append('gDiscount',$('#gDiscount').val());
+        myform.append('gOffer',$('#gOffer').val());
+        myform.append('gInventory',$('#gInventory').val());
+        myform.append('gDetail',$('#gDetail').val());
+        myform.append('gTryeat',$("input[name='eat']:checked").val());
+        $.ajax({
+            url: path+"/BgGoods/updateGoods",
+            type: "POST",
+            data: myform,
+            cache:false,
+            processData:false,
+            contentType:false,
+            beforeSend:function () {
+                alert("我已准备好");
+            },
+            success:function (data) {
+                alert(data);
+                if(data==1){
+                    window.location.href = "goods-operation.html";
+                }else if(data==3){
+                    alert("商品编号不存在！")
+                }else if(data==0){
+                    alert("没有该产品！");
+                }
+            },
+            error:function (data) {
+                alert("编辑商品失败！");
+            }
+
+        });
+    });
+
+    function addNum() {
+        var a=GetRequest();
+        /*var gNum=a['gNum'];*/
+        $('#gNum').val(a['gNum']);
+        $('#pNum').val(a['pNum']);
+        $('#gName').val(a['gName']);
+    }
+
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+</script>
 </html>
