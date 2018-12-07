@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "user", schema = "secondproject", catalog = "")
+@Table(name = "user", schema = "secondproject")
 @DynamicInsert(value = true)
 public class UserEntity {
     private int uId;

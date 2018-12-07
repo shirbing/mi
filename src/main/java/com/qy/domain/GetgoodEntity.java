@@ -5,7 +5,7 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "getgood", schema = "secondproject", catalog = "")
+@Table(name = "getgood", schema = "secondproject")
 @DynamicInsert(value = true)
 public class GetgoodEntity {
     private int ggId;
@@ -13,7 +13,7 @@ public class GetgoodEntity {
     private String ggPhone;
     private String ggAddress;
     private String ggState;
-    private int uId;
+    private String uName;
 
     @Id
     @Column(name = "gg_id")
@@ -66,13 +66,13 @@ public class GetgoodEntity {
     }
 
     @Basic
-    @Column(name = "u_id")
-    public int getuId() {
-        return uId;
+    @Column(name = "u_name")
+    public String getuName() {
+        return uName;
     }
 
-    public void setuId(int uId) {
-        this.uId = uId;
+    public void setuName(String uName) {
+        this.uName = uName;
     }
 
     @Override
@@ -83,11 +83,11 @@ public class GetgoodEntity {
         GetgoodEntity that = (GetgoodEntity) o;
 
         if (ggId != that.ggId) return false;
-        if (uId != that.uId) return false;
         if (ggName != null ? !ggName.equals(that.ggName) : that.ggName != null) return false;
         if (ggPhone != null ? !ggPhone.equals(that.ggPhone) : that.ggPhone != null) return false;
         if (ggAddress != null ? !ggAddress.equals(that.ggAddress) : that.ggAddress != null) return false;
         if (ggState != null ? !ggState.equals(that.ggState) : that.ggState != null) return false;
+        if (uName != null ? !uName.equals(that.uName) : that.uName != null) return false;
 
         return true;
     }
@@ -99,7 +99,7 @@ public class GetgoodEntity {
         result = 31 * result + (ggPhone != null ? ggPhone.hashCode() : 0);
         result = 31 * result + (ggAddress != null ? ggAddress.hashCode() : 0);
         result = 31 * result + (ggState != null ? ggState.hashCode() : 0);
-        result = 31 * result + uId;
+        result = 31 * result + (uName != null ? uName.hashCode() : 0);
         return result;
     }
 }

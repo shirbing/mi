@@ -5,7 +5,7 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "trade", schema = "secondproject", catalog = "")
+@Table(name = "trade", schema = "secondproject")
 @DynamicInsert(value = true)
 public class TradeEntity {
     private int tId;

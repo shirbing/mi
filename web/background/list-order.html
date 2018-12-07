@@ -10,47 +10,53 @@
     <link rel="stylesheet" href="css/admin.css">
     <script src="js/jquery.js"></script>
     <script src="js/pintuer.js"></script>
+    <style  type="text/css">
+        #first{
+            margin-left:600px;
+        }
+        #second{
+            margin-left: 400px;
+        }
+    </style>
 </head>
-<body>
+
+<body onload="getList()">
 <form method="post" action="" id="listform">
     <div class="panel admin-panel">
         <div class="panel-head"><strong class="icon-reorder">订单管理</strong></div>
-        <div class="padding border-bottom">
+        <div class="padding border-bottom" id="second">
             <ul class="search" style="padding-left:10px;">
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="s_ishome"  onchange="changesearch()" style="width:76px;margin-left: 10px; height:30px; display:inline-block ">
+                    <!--<select name="s_ishome"  onchange="changesearch()" style="width:76px;margin-left: 10px; height:30px; display:inline-block ">
                         <option value="1">订单号</option>
                         <option value="0">用户账号</option>
-                    </select>
-                    &nbsp;&nbsp;&nbsp;
-                    <select name="s_istop"  onchange="changesearch()"  style="width:76px;margin-left: 10px; height:30px;display:inline-block">
+                    </select>-->
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="s_istop"  onclick="getList()" id="state" style="width:76px;margin-left: 10px; height:30px;display:inline-block">
                         <option value="">订单状态</option>
-                        <option value="待付款">待付款</option>
-                        <option value="待发货">待发货</option>
-                        <option value="待收货">待收货</option>
-                        <option value="交易成功">交易成功</option>
-                        <option value="交易失败">交易失败</option>
+                        <option value="未发货">未发货</option>
+                        <option value="已发货">已发货</option>
                     </select>
                 </li>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <li>
-                    <input type="text" placeholder="请输入搜索关键字" name="keywords" class="input" style="width:250px;margin-left: 30px;margin-right: 10px; line-height:17px;display:inline-block " />
-                    <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
+                    <input type="text" placeholder="请输入搜索关键字" name="keywords" id="keywords" value=""  class="input" style="width:250px;margin-left: 30px;margin-right: 10px; line-height:17px;display:inline-block " />
+                    <a href="javascript:void(0)" class="button border-main icon-search" onclick="getList()" > 搜索</a></li>
             </ul>
         </div>
         <table class="table table-hover text-center">
             <tr>
                 <th width="10%">序号</th>
                 <th width="10%">订单号</th>
-                <th width="10%">用户账号</th>
+                <th width="10%">订单留言</th>
                 <th width="10%">收货人</th>
-                <th width="10%">收货电话</th>
+                <th width="10%">是否付款</th>
                 <th width="10%">订单金额</th>
-                <th width="10%">订单状态</th>
+                <th width="10%">发货状态</th>
                 <th width="10%">提交时间</th>
                 <th width="20%">操作</th>
             </tr>
-            <tbody name="list" id="tt">
+            <tbody name="list" class="tt">
             <tr>
                 <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
                 <td width="10%"><img src="images/11.jpg" alt="" width="70" height="50" /></td>
@@ -60,11 +66,10 @@
                 <td> </td>
                 <td> </td>
                 <td> </td>
-                <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span>解除</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span>禁用</a> </div></td>
+                <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span>修改付款状态</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span>修改发货状态</a> </div></td>
             </tr>
             </tbody>
             <tr>
-                <td >总共有<span></span>个订单</td>
                 <td> </td>
                 <td> </td>
                 <td> </td>
@@ -72,25 +77,110 @@
                 <td> </td>
                 <td> </td>
                 <td> </td>
-                <td>本页显示<span></span>个订单 </td>
-            </tr>
-            <tr>
-                <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <a href="">下一页</a><a href="">尾页</a> </div></td>
             </tr>
         </table>
     </div>
 </form>
+<div id="first">
+    <button class="previous" onclick="previousPage()">上一页</button>
+    <button class="next" onclick="nextPage()">下一页</button>
+</div>
 <script type="text/javascript">
-    //搜索
-    function changesearch(){
+    //声明一个变量 表示当前页数
+    var currentPage=1;
+    //获取当前表格对象
+    var tb=document.getElementsByClassName("tt")[0];
 
+    //删除当前已经存在的元素
+    function remove(){
+        var leng=tb.rows.length;
+        for (var i= 0; i <leng;i++) {
+            tb.deleteRow(0);
+        }
+    }
+    //向table添加元素
+    function addElement(obj) {
+        for (var i = 0; i < obj.length; i++) {
+            $(".tt").append(
+                '<tr>' +
+                '<td>' + obj[i].oId + '</td>' +
+                '<td>' + obj[i].oNum + '</td>' +
+                '<td>' + obj[i].oMsg + '</td>' +
+                '<td>' + obj[i].ggName + '</td>' +
+                '<td>' + obj[i].oPaystate + '</td>' +
+                '<td>' + obj[i].oMoney + '</td>' +
+                '<td>' + obj[i].oSendstate + '</td>' +
+                '<td>' +new Date(parseInt(obj[i].oOrdertime )).toLocaleString().replace(/:\d{1,2}$/,' ') + '</td>' +
+                '<td>' +'<a class="button border-red" onclick="setValues('+obj[i].oId+')"> <span class="icon-edit"></span>修改发货状态</a>'+
+                    '<a href="detail-order.html?oId='+obj[i].oId+'" class="button border-red"> <span class="icon-edit"></span>查看订单详情</a>'+ '</td>' +
+                '</tr>'
+            );
+        }
+        /*<a class='button border-main' onclick='setValues("+index+")'><span class='icon-edit'></span>编辑</a>*/
+        if(obj==null){
+            $(".tt").append( "<tr style='text-align: center'>"
+                +"<td colspan='6'><font color='#cd0a0a'>"+ 暂无记录 + "</font></td>"
+                +"</tr>");
+        }
+    }
+    //修改发货状态
+    function setValues(i) {
+        var path = "/" + location.pathname.split("/")[1];
+        $(function(){
+            $.get(path+"/bgorder/editsend",{"oId":i},function(data){
+                if(data=="true"){
+                    alert("修改成功");
+                    window.location.href="add-logistics.html?oId="+i;
+                }
+            },"json");
+        })
+    }
+    //添加
+    function addAtt(){
+        var btn=document.getElementsByClassName("next")[0];
+        btn.setAttribute("disabled", "disabled");
+    }
+    //移除
+    function removeAtt(){
+        var btn=document.getElementsByClassName("next")[0];
+        btn.removeAttribute("disabled");
     }
 
-    //单个删除
-    function del(id,mid,iscid){
-        if(confirm("您确定要删除吗?")){
+    //获取当前信息
+    function getList(){
+        var path = "/" + location.pathname.split("/")[1];
+        /*alert(currentPage);
+        alert($("#state").val());*/
+        $(function(){
+            $.get(path+"/bgorder/list",{"page":currentPage ,"oSendstate":$("#state").val(),"ggName":$("#keywords").val()},function(data){
+                var len=data.length;
+                if(len<3){
+                    addAtt();
+                }else {
+                    removeAtt();
+                }
+                remove();
+                addElement(data);
+                //alert(data[0].name);
+            },"json");
+        })
+    }
 
-        }
+    //下一页
+    function nextPage(){
+        //让当前页数+1；
+        currentPage++;
+        //请求网络
+        getList();
+    }
+
+    function previousPage(){
+        //1判断currentPage==1;
+        if(currentPage==1)return;
+        //currentPage-1;
+        currentPage--;
+        //网络请求
+        getList();
     }
 
 

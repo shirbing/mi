@@ -10,20 +10,65 @@
     <link rel="stylesheet" href="css/admin.css">
     <script src="js/jquery.js"></script>
     <script src="js/pintuer.js"></script>
-</head>
-<body>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        function edit(){
+            var path = "/" + location.pathname.split("/")[1];
+            $.get(path+"/bgproduct/edit",{"pStyle":$("#style").val(),"pName":$("#name").val(),
+                    "pUnit":$("#select").val(),"pNum":$("#num").val(),
+                    "pPackage":$('input[name="bz"]:checked ').val(),
+                    "pTryeat":$('input[name="eat"]:checked ').val(), "pWeight":$('input[name="weit"]:checked ').val()},
+                function(data){
+                    if(data=="true") {
+                        alert("编辑成功");
+                        window.location.href = "list-product.html";
+                    }
+                },"json");
+        }
+    </script>
+    <script type="text/javascript">
+        function  add() {
+            var a=GetRequest();
+           // alert("pNum:"+a['pNum']) //打印出传过来的id
+            var ss=a['pNum']
+            $("#num").val(ss);
+
+        }
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+    </script>
+<body onload="add()">
 <div class="panel admin-panel">
     <div class="panel-head"><strong class="icon-reorder">新增商品</strong></div>
     <div class="panel admin-panel margin-top" id="add">
         <div class="panel-head"><strong><span class="icon-pencil-square-o"></span>添加信息</strong></div>
         <div class="body-content">
-            <form method="post" class="form-x" action="">
+            <form method="post" class="form-x" >
+                <div class="form-group">
+                    <div class="label">
+                        <label>产品编号：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w50" name="num" id="num" data-validate="required:请填写产品分类"  />
+                        <div class="tips"></div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="label">
                         <label>产品分类：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写产品分类"  />
+                        <input type="text" class="input w50" name="url" id="style" data-validate="required:请填写产品分类"  />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -32,10 +77,12 @@
                         <label>产品名称：</label>
                     </div>
                     <div class="field">
-                        <select name="cid" class="input w50">
+                        <select name="cid" class="input w50" id="name">
                             <option value="">请选择</option>
-                            <option value="有机米商品">有机米商品</option>
-                            <option value="试吃商品">试吃商品</option>
+                            <option value="信阳有机米">信阳长米</option>
+                            <option value="淮滨原生态米">淮滨原生态米</option>
+                            <option value="罗山黑米">罗山黑米</option>
+                            <option value="光山香米">光山香米</option>
                         </select>
                         <div class="tips"></div>
                     </div>
@@ -45,7 +92,7 @@
                         <label>库存单位：</label>
                     </div>
                     <div class="field">
-                        <select name="cid" class="input w50">
+                        <select name="cid" class="input w50" id="select">
                             <option value="">请选择</option>
                             <option value="克">克</option>
                             <option value="袋">袋</option>
@@ -55,7 +102,7 @@
                         <div class="tips"></div>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <div class="label">
                         <label>单品参数：</label>
                         <hr>
@@ -63,14 +110,14 @@
                     <div class="field">
                         <div class="tips"></div>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <div class="label">
                         <label>包装：</label>
                     </div> <br> <br>
                     <div class="field">
-                        <input type="radio" name="bz" value="jz">精装&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="bz" value="zk">真空包装
+                        <input type="radio" name="bz" value="精装">精装&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="bz" value="真空装">真空包装
                         <div class="tips"></div>
                     </div>
                 </div><br>
@@ -91,8 +138,8 @@
                         <label>试吃商品：</label>
                     </div> <br> <br>
                     <div class="field">
-                        <input type="radio" name="eat" value="yes">是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="eat" value="no">否
+                        <input type="radio" name="eat" value="是">是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="eat" value="否">否
                         <div class="tips"></div>
                     </div>
                 </div><br>
@@ -101,7 +148,7 @@
                         <label></label>
                     </div>
                     <div class="field">
-                        <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                        <button class="button bg-main icon-check-square-o" type="submit" onclick="edit()"> 提交</button>
                     </div>
                 </div>
             </form>

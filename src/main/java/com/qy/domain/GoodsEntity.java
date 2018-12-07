@@ -5,11 +5,11 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "goods", schema = "secondproject", catalog = "")
+@Table(name = "goods", schema = "secondproject")
 @DynamicInsert(value = true)
 public class GoodsEntity {
     private int gId;
-    private Integer pNum;
+    private int pNum;
     private String gName;
     private String gNum;
     private String gImg;
@@ -34,13 +34,11 @@ public class GoodsEntity {
 
     @Basic
     @Column(name = "p_num")
-
-    public Integer getpNum() {
+    public int getpNum() {
         return pNum;
     }
 
-    public void setpNum(Integer pNum) {
-
+    public void setpNum(int pNum) {
         this.pNum = pNum;
     }
 
@@ -180,9 +178,7 @@ public class GoodsEntity {
 
     @Override
     public int hashCode() {
-
         int result = gId;
-
         result = 31 * result + pNum;
         result = 31 * result + (gName != null ? gName.hashCode() : 0);
         result = 31 * result + (gNum != null ? gNum.hashCode() : 0);

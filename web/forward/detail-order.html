@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+    <style type="text/css">
+        .labelsss{
+            margin-left: 20px;
+            margin-top: 30px;
+            font-size: 15px;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+        //{"oId":a['oId']},
+        function  add() {
+            var a=GetRequest();
+            var path = "/" + location.pathname.split("/")[1];
+            $.get(path+"/fworder/detail",{"oId":a['oId']},function (data) {
+                addElement(data);
+                //alert(data[0].gNum);
+            },"json");
+        }
+        //向table添加元素
+        function addElement(obj) {
+            for (var i = 0; i < obj.length; i++) {
+                $(".tt").append(
+                    '<tr>' +
+                    '<td>' + obj[i].gNum + '</td>' +
+                    '<td width="10%"><img src='+obj[i].sIcon+' alt="商品图片" width="70" height="50" /></td>'+
+                    /*  '<td>' + obj[i].sIcon + '</td>' +*/
+                    '<td>' + obj[i].sName + '</td>' +
+                    '<td>' + obj[i].lName + '</td>' +
+                    '<td>' + obj[i].sNum + '</td>' +
+                    '<td>' + obj[i].sPrice + '</td>' +
+                    '<td>' + '<a class="button border-red" onclick="setValues()"> <span class="icon-edit"></span>返回</a>' + '</td>' +
+                    '</tr>'
+                );
+                $("#first").html(obj[i].oNum);
+                $("#second").html(obj[i].uName);
+                $("#third").html(obj[i].sSumprice);
+                $("#forth").html(obj[i].sSumprice);
+                $("#five").html("免邮");
+                $("#sixth").html("请尽快发货");
+                $("#seven").html(obj[i].ggName);
+                $("#eight").html(obj[i].ggPhone);
+                $("#nine").html(obj[i].ggAddress);
+                $("#ten").html(new Date(parseInt(obj[i].lTime)).toLocaleString().replace(/:\d{1,2}$/,' '));
+            }
+        }
+        //返回事件
+        function setValues() {
+            window.location.href="list-order.html";
+        }
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+    </script>
+</head>
+<body onload="add()">
+<div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder">订单详情</strong></div>
+    <div class="labelsss">
+        <label>订单编号：</label><span class="ddh" id="first"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="labelsss">
+        <label>用户账号：</label><span class="yhzh" id="second"></span>
+    </div><br>
+    <table class="table table-hover text-center">
+        <tr>
+            <th width="12%">商品编号</th>
+            <th width="18%">商品图片</th>
+            <th width="16%">商品名称</th>
+            <th width="13%">快递</th>
+            <th width="13%">数量</th>
+            <th width="13%">单价</th>
+            <th width="12%">操作</th>
+        </tr>
+        <tbody name="list" id="tt" class="tt">
+        <!-- <tr>
+             <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
+             <td width="10%"><img src="images/11.jpg" alt="" width="70" height="50" /></td>
+             <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
+             <td><font color="#00CC99">首页</font></td>
+             <td>2016-07-01</td>
+             <td> </td>
+             <td> </td>
+             &lt;!&ndash;<td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span>确认付款</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span>取消订单</a> </div></td>&ndash;&gt;
+         </tr>-->
+        </tbody>
+    </table><br><br>
+    <!--<div class="labelsss">
+        <label>合计数量：</label><span class="a1" ></span>
+    </div>-->
+    <div class="labelsss">
+        <label>订单金额：</label><span class="a2" id="third"></span>
+    </div>
+    <div class="labelsss">
+        <label>应付金额：</label><span class="a3" id="forth"></span>
+    </div>
+    <div class="labelsss">
+        <label>运费：</label><span class="a4" id="five"></span>
+    </div>
+    <div class="labelsss">
+        <label>买家留言：</label><span class="a5" id="sixth"></span>
+    </div>
+    <div class="labelsss">
+        <label>收货人：</label><span class="a6" id="seven"></span>
+    </div>
+    <div class="labelsss">
+        <label>联系方式：</label><span class="a7" id="eight"></span>
+    </div>
+    <div class="labelsss">
+        <label>收货地址：</label><span class="a8" id="nine"></span>
+    </div>
+    <div class="labelsss">
+        <label>提交时间：</label><span class="a9" id="ten"></span>
+
+      <!--  <div class="button-group" style="margin-right: 20px">
+            <a class="button border-main" href="money.html"><span class="icon-edit"></span>确认付款</a>
+            <a class="button border-red" href="car.html" onclick=""><span class="icon-trash-o"></span>取消订单</a>
+        </div>-->
+    </div>
+
+</div>
+<script type="text/javascript">
+
+    //搜索
+    function changesearch(){
+
+    }
+
+
+
+
+</script>
+</body>
+</html>

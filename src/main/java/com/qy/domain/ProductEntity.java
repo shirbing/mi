@@ -5,9 +5,7 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 
 @Entity
-
 @Table(name = "product", schema = "secondproject")
-
 @DynamicInsert(value = true)
 public class ProductEntity {
     private int pId;
@@ -15,7 +13,7 @@ public class ProductEntity {
     private int pNum;
     private String pName;
     private String pPackage;
-    private int pWeight;
+    private Integer pWeight;
     private String pTryeat;
     private String pUnit;
 
@@ -71,11 +69,11 @@ public class ProductEntity {
 
     @Basic
     @Column(name = "p_weight")
-    public int getpWeight() {
+    public Integer getpWeight() {
         return pWeight;
     }
 
-    public void setpWeight(int pWeight) {
+    public void setpWeight(Integer pWeight) {
         this.pWeight = pWeight;
     }
 
@@ -90,9 +88,7 @@ public class ProductEntity {
     }
 
     @Basic
-
     @Column(name = "p_unit")
-
     public String getpUnit() {
         return pUnit;
     }
@@ -110,10 +106,10 @@ public class ProductEntity {
 
         if (pId != that.pId) return false;
         if (pNum != that.pNum) return false;
-        if (pWeight != that.pWeight) return false;
         if (pStyle != null ? !pStyle.equals(that.pStyle) : that.pStyle != null) return false;
         if (pName != null ? !pName.equals(that.pName) : that.pName != null) return false;
         if (pPackage != null ? !pPackage.equals(that.pPackage) : that.pPackage != null) return false;
+        if (pWeight != null ? !pWeight.equals(that.pWeight) : that.pWeight != null) return false;
         if (pTryeat != null ? !pTryeat.equals(that.pTryeat) : that.pTryeat != null) return false;
         if (pUnit != null ? !pUnit.equals(that.pUnit) : that.pUnit != null) return false;
 
@@ -127,7 +123,7 @@ public class ProductEntity {
         result = 31 * result + pNum;
         result = 31 * result + (pName != null ? pName.hashCode() : 0);
         result = 31 * result + (pPackage != null ? pPackage.hashCode() : 0);
-        result = 31 * result + pWeight;
+        result = 31 * result + (pWeight != null ? pWeight.hashCode() : 0);
         result = 31 * result + (pTryeat != null ? pTryeat.hashCode() : 0);
         result = 31 * result + (pUnit != null ? pUnit.hashCode() : 0);
         return result;

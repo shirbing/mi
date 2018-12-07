@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/style1.css">
+<title>支付</title>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript">
+      //{"oId":a['oId']},
+      function  add() {
+          var a=GetRequest();
+          $("#zgs").val(a['oMoney']);
+
+
+      }
+      function GetRequest() {
+          var url = location.search; //获取url中"?"符后的字串
+          var theRequest = new Object();
+          if (url.indexOf("?") != -1) {
+              var str = url.substr(1);
+              strs = str.split("&");
+              for (var i = 0; i < strs.length; i++) {
+                  theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+              }
+          }
+          return theRequest;
+      }
+  </script>
+</head>
+<body onload="add()">
+
+<div class="container">
+    <div class="row">
+      <div class="container_logo">
+        <div class="play col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <img src="./images/logo.png" />
+        </div>
+      </div>
+    </div>
+    <!--<form action="#" method="post">-->
+      <div class="row">
+        <div class="play col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <div class="form-group">
+            <input type="hidden" class="getId" name="id">
+            <h4>付款金额</h4>
+            <div class="number_amount">
+              <label >￥</label>
+              <input type="number" name="amount" id="zgs">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="_submit col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <a href="pwd.html"><input type="submit" value="支付" class="btn btn-primary submit-amount" onclick="pwd()"></a>
+        </div>
+      </div>
+    <!--</form>-->
+  </div>
+  </div>
+<!--  <div class="modal fade" tabindex="-1" role="dialog" id='exampleModal'>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">确定</button>
+        </div>
+      </div>
+    </div>
+</div>-->
+<div class="mask"></div>
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script>
+/*
+var $amountInput = $('[type="number"]');
+var amount = '';
+var $getId = $('[type="hidden"]');
+var getparse=ParaMeter();
+$getId.val(getparse.id);
+$(".quick_amount p").off("click").on("click", function () {
+  amount = $(this).text();
+  if (!$(this).hasClass('active')) {
+    $(this).addClass('active').siblings().removeClass('active');
+    $amountInput.val(amount);
+  } else {
+    $(this).removeClass('active');
+    $amountInput.val('');
+  }
+})
+$amountInput.on('input propertychange', function () {
+  if ($(this).val() > 5000) {
+    $('#exampleModal').modal('show')
+  }
+  if($(this).val()!==$('.quick_amount p.active').text()){
+    $('.quick_amount p').removeClass('active');
+  }
+})
+$('#exampleModal').on('hidden.bs.modal', function (e) {
+  $amountInput.val(5000);
+})
+function ParaMeter()
+{
+  var obj={};
+  var arr=location.href.substring(location.href.lastIndexOf('?')+1).split("&");
+  for(var i=0;i < arr.length;i++){
+  var aa=arr[i].split("=");
+  obj[aa[0]]=aa[1];
+}
+  return obj;
+}
+function pwd(){
+    window.location.href="pwd.html";
+    }
+*/
+
+function f() {
+//    写你的方法
+}
+</script>
+<div style="text-align:center;">
+
+</div>
+</body>
+</html>

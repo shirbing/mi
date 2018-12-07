@@ -5,11 +5,11 @@ import com.qy.domain.UserEntity;
 import com.qy.service.BgUserMsgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository(value = "bgUserMsgService")
+@Service(value = "bgUserMsgService")
 public class BgUserMsgServiceImpl implements BgUserMsgService {
     @Autowired
     @Qualifier(value = "bgUserMsgDao")

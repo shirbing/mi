@@ -10,6 +10,24 @@
     <link rel="stylesheet" href="css/admin.css">
     <script src="js/jquery.js"></script>
     <script src="js/pintuer.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        function add(){
+            var path = "/" + location.pathname.split("/")[1];
+          $.get(path+"/bgproduct/product", {
+                  "pStyle": $("#style").val(),
+                  "pName": $("#name").val(),
+                  "pUnit": $("#select").val(),
+                  "pNum": $("#num").val()
+              },
+              function(data){
+                  if(data=="true") {
+                      alert("添加成功");
+                      window.location.href = "list-product.html";
+                  }
+              },"json");
+        }
+    </script>
 </head>
 <body>
 <div class="panel admin-panel">
@@ -23,7 +41,7 @@
                         <label>产品分类：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写产品分类"  />
+                        <input type="text" class="input w50" name="url" id="style" data-validate="required:请填写产品分类"  />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -32,16 +50,34 @@
                         <label>产品名称：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写产品名称"  />
+                        <input type="text" class="input w50" name="url" id="name" data-validate="required:请填写产品名称"  />
+                        <div class="tips"></div>
+                    </div>
+                </div>
+               <!-- <div class="form-group">
+                    <div class="label">
+                        <label>产品重量：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w50" name="url" id="weight" data-validate="required:请填写产品名称"  />
+                        <div class="tips"></div>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <div class="label">
+                        <label>产品编号：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w50" name="url" id="num" data-validate="required:请填写产品名称"  />
                         <div class="tips"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="label">
-                        <label>库存单位：</label>
+                        <label>产品单位：</label>
                     </div>
                     <div class="field">
-                        <select name="cid" class="input w50">
+                        <select name="cid" class="input w50" id="select">
                             <option value="">请选择</option>
                             <option value="克">克</option>
                             <option value="袋">袋</option>
@@ -51,12 +87,38 @@
                         <div class="tips"></div>
                     </div>
                 </div>
+                  <!--  <div class="form-group">
+                        <div class="label">
+                            <label>包装类型：</label>
+                        </div>
+                        <div class="field">
+                            <select name="cid" class="input w50" id="package">
+                                <option value="">请选择</option>
+                                <option value="精包装">精包装</option>
+                                <option value="真空包装">真空包装</option>
+                            </select>
+                            <div class="tips"></div>
+                        </div>
+                    </div>-->
+                   <!-- <div class="form-group">
+                        <div class="label">
+                            <label>是否试吃：</label>
+                        </div>
+                        <div class="field">
+                            <select name="cid" class="input w50" id="tyeat">
+                                <option value="">请选择</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
+                            </select>
+                            <div class="tips"></div>
+                        </div>
+                    </div>-->
                 <div class="form-group">
                     <div class="label">
                         <label></label>
                     </div>
                     <div class="field">
-                        <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                        <button class="button bg-main icon-check-square-o"  id="submit" type="submit" onclick="add()"> 提交</button>
                     </div>
                 </div>
             </form>

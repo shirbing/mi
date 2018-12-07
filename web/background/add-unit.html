@@ -11,6 +11,19 @@
     <script src="js/jquery.js"></script>
     <script src="js/pintuer.js"></script>
 </head>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    function addUnit(){
+        var path = "/" + location.pathname.split("/")[1];
+        $.get(path+"/unit/add",{"uName":$("#name").val(),"uValue":$("#increment").val()},
+            function(data){
+                if(data=="true") {
+                    alert("添加成功");
+                    window.location.href = "list-unit.html";
+                }
+            },"json");
+    }
+</script>
 <body>
 <div class="panel admin-panel">
     <div class="panel-head"><strong class="icon-reorder">添加单位</strong></div>
@@ -22,7 +35,7 @@
                         <label>单位名称：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写单位名称"  />
+                        <input type="text" class="input w50" id="name" name="url" data-validate="required:请填写单位名称"  />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -31,7 +44,7 @@
                         <label>最小增量：</label>
                     </div>
                     <div class="field">
-                        <input type="text" class="input w50" name="url" data-validate="required:请填写最小增量"  />
+                        <input type="text" class="input w50" id="increment" name="url" data-validate="required:请填写最小增量"  />
                         <div class="tips"></div>
                     </div>
                 </div>
@@ -40,7 +53,7 @@
                         <label></label>
                     </div>
                     <div class="field">
-                        <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                        <button class="button bg-main icon-check-square-o" type="submit" onclick="addUnit()"> 提交</button>
                     </div>
                 </div>
             </form>
