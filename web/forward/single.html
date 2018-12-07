@@ -20,6 +20,8 @@
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<!-- start-smoth-scrolling -->
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
 	<script type="text/javascript" src="js/move-top.js"></script>
 	<script type="text/javascript" src="js/easing.js"></script>
 	<script type="text/javascript">
@@ -29,11 +31,77 @@
                 $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
             });
         });
+        var path="/"+location.pathname.split("/")[1];
+        var req=GetRequest()
+        function findOne() {
+            /*var gNum=a['gNum'];*/
+            $.get(
+                path+"/FwGoods/findOne",
+                {"gNum":req['gNum']},
+                function (data) {
+                    $('#h5').html(JSON.parse(data).gName);
+                    $('#img-responsive1').attr("src","../background/"+JSON.parse(data).gImg);
+                    $('#ph3').html(JSON.parse(data).gDetail);
+                }
+            );
+
+            $.get(
+                path+"/BgEva/findOneEval",
+                {"gNum":req['gNum']},
+                function (data) {
+                    $.each(JSON.parse(data), function (i, obj) {
+                        $("#Eval").append(
+                        '<div style="margin: 20px;">'+
+                          '<img src="'+obj.userEntity.uIcon+'" style="width: 50px;height: 55px;">'+
+                            '<span id="getEva" style="font-size: 17px;">'+obj.userEntity.uName+': </span>'+
+                        '<div style="margin-left: 80px;">'+
+                        /*'<label  style="font-size: 17px;" > '+obj.userEntity.uName+'：</label>'+*/
+                       /* '</div>'+
+                        '<div class="field">'+*/
+                        /*'<label style="font-size: 15px;" >'+*/
+                        '<span id="getEva" style="font-size: 17px;">'+obj.eEval+' </span>'+
+                        /*'</label>'+*/
+                        '</div>'+
+                        '</div>'+
+                        '<div >'+
+                        '<div >'+
+                            '<label style="font-size: 15px;margin-right: 40px;margin-bottom: 20px;margin-left: 20px; float: right">'+
+                            '<span >：商家回复</span>'+
+                            '</label>'+
+                        '</div>'+
+                        '<div >'+
+                            '<label  style="float: right">'+obj.eReply+'</label>'+
+                           /* '<span id="getEva">'+obj.eEval+' </span>'+*/
+                        '</div>'+
+                        '</div>'+
+                        '<hr>' +
+                        '<hr>'
+                        );
+
+                    });
+                }
+            );
+
+        }
+
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
 	</script>
 	<!-- start-smoth-scrolling -->
 </head>
 
-<body>
+<body onload="findOne()">
 <!-- header -->
 <div class="agileits_header">
 	<div class="w3l_offers">
@@ -140,9 +208,9 @@
 				<h3>欢迎试吃，分享半价！<span class="blink_me"></span></h3>
 			</div>
 			<div class="agileinfo_single">
-				<h5>&emsp;&emsp;&emsp;大米</h5>
+				<h5 id="h5" style="margin-left: 95px;">&emsp;&emsp;&emsp;</h5>
 				<div class="col-md-4 agileinfo_single_left">
-					<img id="example" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543380465648&di=5b12d96097c62780408ade47a09f030b&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F55%2F95%2F20300544346093150268954146673.jpg" alt=" " class="img-responsive" />
+					<img  src="" alt="商品图片 " id="img-responsive1" class="img-responsive" />
 				</div>
 				<div class="col-md-8 agileinfo_single_right">
 					<div class="rating1">
@@ -160,9 +228,11 @@
 						</span>
 					</div>
 					<div class="w3agile_description">
-						<h4>说明:</h4>
+						<h4>商品详情:</h4>
 						<p>大米可提供丰富B族维生素；大米具有补中益气、健脾养胃、益精强志、和五脏、通血脉、聪耳明目、止烦、止渴、止泻的功效；米粥具有补脾、和胃、清肺功效</p>
+                        <p id="ph3"></p>
 					</div>
+
 					<!-- <div class="snipcart-item block">
 						<div class="snipcart-thumb agileinfo_single_right_snipcart">
 							<h4>￥100.00 <span>￥50.00</span></h4>
@@ -177,7 +247,37 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
-<!-- //banner -->
+    <br><strong><hr> <hr> </strong>
+    <h1 style=" text-align: center; display: inline-block; width: 100%">商品评价</h1>
+
+    <div class="form-x" id="Eval">
+
+        <!--<div class="form-group">-->
+            <!--<div class="label">
+                <label for="sitename" id="username" style="line-height:33px;" >小白：</label>
+            </div>
+            <div class="field">
+                <label style="font-size: 15px;" >
+                    <span id="getEva"> </span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="label">
+                <label for="sitename" id="getReply" style="line-height:33px;"></label>
+            </div>
+            <div class="field">
+                <label style="font-size: 15px;">
+                    <span >：商家回复</span>
+                </label>
+            </div>
+        </div>-->
+
+    </div>
+
+
+    <!-- //banner -->
 <!-- brands -->
 	<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_popular">
 		<div class="container">
@@ -300,7 +400,7 @@ $(document).ready(function(){
     );
 });
 </script>
-<script type="text/javascript" id="snipcart" src="js/snipcart.js" data-api-key="ZGQxNzVjZTItOWRmNS00YjJhLTlmNGUtMDE4NjdiY2RmZGNj"></script>
+<script type="text/javascript" id="snipcart"  data-api-key="ZGQxNzVjZTItOWRmNS00YjJhLTlmNGUtMDE4NjdiY2RmZGNj"></script>
 <!-- here stars scrolling icon -->
 	<script type="text/javascript">
 		$(document).ready(function() {

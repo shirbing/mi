@@ -191,14 +191,14 @@
         '<table class="table table-hover table-responsive" id="' + idCartTable + '"></table>' +
         '</div>' +
         '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="">提交</button>' +
-
+        '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="addShopping()">提交</button>' +
         '</div>' +
         '</div>' +
         '</div>' +
         '</div>'
       );
     }
+
     //----------------------------------------------------------------------------------------------------------------
     var drawTable = function(){
       var $cartTable = $("#" + idCartTable);
@@ -307,6 +307,14 @@
     $(document).on('click', "." + classProductRemove, function(){
       var $tr = $(this).closest("tr");
       var id = $tr.data("id");
+      var path = "/" + location.pathname.split("/")[1];
+      $.post(path+"/shop/delete",{"sId":id},function(data) {
+            if(data=="true"){
+                alert("删除成功");
+            }else {
+              alert("删除失败");
+            }
+      },"json");
       $tr.hide(500, function(){
         ProductManager.removeProduct(id);
         drawTable();
@@ -349,16 +357,24 @@
       var name = $target.data('name');
       var summary = $target.data('summary');
       var price = $target.data('price');
+      alert("---");
       var quantity = $target.data('quantity');
       var image = $target.data('image');
-
+      var gNum= $target.data('gnum');
       ProductManager.setProduct(id, name, summary, price, quantity, image);
       $cartBadge.text(ProductManager.getTotalQuantity());
+
+      var path = "/" + location.pathname.split("/")[1];
+      $.post(path+"/shop/car",{"sId":id,"sName":name,"sIcon":image,"sPrice":price,"sNum":1,"sSumprice":price,"gNum":gNum},
+          function (data) {
+             if(data=="true"){
+               alert("添加成功");
+             }else{
+               alert("添加失败");
+             }
+       },"json");
     });
-
   }
-
-
   $.fn.myCart = function (userOptions) {
     loadMyCartEvent(userOptions);
     return $.each(this, function () {
@@ -366,5 +382,8 @@
     });
   }
 
-
 })(jQuery);
+
+function addShopping(){
+  window.location.href="car.html";
+}

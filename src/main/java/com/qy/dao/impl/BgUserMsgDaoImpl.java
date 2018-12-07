@@ -2,7 +2,6 @@ package com.qy.dao.impl;
 
 import com.qy.dao.BgUserMsgDao;
 import com.qy.domain.UserEntity;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -64,7 +63,7 @@ public class BgUserMsgDaoImpl implements BgUserMsgDao {
 
     @Override
     public boolean deleteUser(UserEntity userEntity) {
-        System.out.println(userEntity.getuId());
+        /*System.out.println(userEntity.getuId());*/
         Session session=hibernateTemplate.getSessionFactory().getCurrentSession();
         UserEntity userEntity1=(UserEntity) session.createQuery("from UserEntity where uId=?").setParameter(0,userEntity.getuId()).uniqueResult();
         if (userEntity1.getuState().equals("启用")){

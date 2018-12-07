@@ -48,9 +48,9 @@ public class BgGoodsDaoImpl implements BgGoodsDao {
     }
     //查询
     @Override
-    public List<GoodsEntity> findAllGoods(int currentPage) {
+    public List<GoodsEntity> findAllGoods() {
         Session session= hibernateTemplate.getSessionFactory().getCurrentSession();
-        List<GoodsEntity> goodsEntityList=session.createQuery("from GoodsEntity order by gId desc ").setFirstResult((currentPage-1)*3).setMaxResults(3).list();
+        List<GoodsEntity> goodsEntityList=session.createQuery("from GoodsEntity order by gId desc ").list();
         return goodsEntityList;
     }
 

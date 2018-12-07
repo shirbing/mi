@@ -31,8 +31,8 @@ public class BgGoodsServiceImpl implements BgGoodsService {
     }
 
     @Override
-    public List<GoodsEntity> findAllGoods(int currentPage) {
-        return bgGoodsDao.findAllGoods(currentPage);
+    public List<GoodsEntity> findAllGoods() {
+        return bgGoodsDao.findAllGoods();
     }
 
     @Override

@@ -34,13 +34,11 @@ public class GoodsEntity {
 
     @Basic
     @Column(name = "p_num")
-
     public Integer getpNum() {
         return pNum;
     }
 
     public void setpNum(Integer pNum) {
-
         this.pNum = pNum;
     }
 
@@ -180,9 +178,7 @@ public class GoodsEntity {
 
     @Override
     public int hashCode() {
-
         int result = gId;
-
         result = 31 * result + pNum;
         result = 31 * result + (gName != null ? gName.hashCode() : 0);
         result = 31 * result + (gNum != null ? gNum.hashCode() : 0);

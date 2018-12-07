@@ -83,5 +83,11 @@ public class FwUserController {
         }
         return JSON.toJSONString(i);
     }
+    @RequestMapping("/personInfo")
+    @ResponseBody
+    public String personInfo(HttpServletRequest request){
+        UserEntity userEntity1=(UserEntity) request.getSession().getAttribute("USERENTITY_SESSION_KEY");
+        return JSON.toJSONString(fwUserService.personInfo(userEntity1)) ;
+    }
 
 }
