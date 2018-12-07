@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>主页</title>
 	<link rel="icon" href="data:;base64,=">
 <!-- for-mobile-apps -->
@@ -32,414 +33,456 @@
 	});
 </script>
 <!-- start-smoth-scrolling -->
+
 </head>
-	
+
 <body>
 <!-- header -->
-	<div class="agileits_header">
-		<div class="w3l_offers">
-			<a href="">试 吃 半 价！</a>
-		</div>
-		<div class="w3l_search">
-			<form action="#" method="post">
-				<input type="text" name="Product" value="点此搜索产品..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
-				<input type="submit" value=" ">
-			</form>
-		</div>
-		<div class="product_list_header">  
-			<div style="cursor: pointer;">
-				<span class="glyphicon glyphicon-shopping-cart my-cart-icon"><i class="badge badge-notify my-cart-badge"></i></span>
-			</div>
-		</div>
-		<div class="w3l_header_right">
-			<ul>
-				<li class="dropdown profile_details_drop">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
-					<div class="mega-dropdown-menu">
-						<div class="w3ls_vegetables">
-							<ul class="dropdown-menu drp-mnu">
-								<li><a href="login.html">登 录</a></li>
-								<!--<li><a href="login.html">注 册</a></li>-->
-							</ul>
-						</div>                  
-					</div>	
-				</li>
-			</ul>
-		</div>
-		<div class="w3l_header_right1">
-			<h2><a href="">联 系 我 们</a></h2>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
+<div class="agileits_header">
+    <div class="w3l_offers">
+        <a href="">试 吃 半 价！</a>
+    </div>
+    <div class="w3l_search">
+        <form action="#" method="post">
+            <input type="text" name="Product" value="点此搜索产品..." onfocus="this.value = '';"
+                   onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+            <input type="submit" value=" ">
+        </form>
+    </div>
+    <div class="product_list_header">
+        <div style="cursor: pointer;">
+            <span class="glyphicon glyphicon-shopping-cart my-cart-icon"><i
+                    class="badge badge-notify my-cart-badge"></i></span>
+        </div>
+    </div>
+    <div class="w3l_header_right">
+        <ul>
+            <li class="dropdown profile_details_drop">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span
+                        class="caret"></span></a>
+                <div class="mega-dropdown-menu">
+                    <div class="w3ls_vegetables">
+                        <ul class="dropdown-menu drp-mnu">
+                            <li><a href="login.html">登 录</a></li>
+                            <!--<li><a href="login.html">注 册</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="w3l_header_right1">
+        <h2><a href="">联 系 我 们</a></h2>
+    </div>
+    <div class="clearfix"></div>
+</div>
 <!-- script-for sticky-nav -->
-	<script>
-	$(document).ready(function() {
-		 var navoffeset=$(".agileits_header").offset().top;
-		 $(window).scroll(function(){
-			var scrollpos=$(window).scrollTop(); 
-			if(scrollpos >=navoffeset){
-				$(".agileits_header").addClass("fixed");
-			}else{
-				$(".agileits_header").removeClass("fixed");
-			}
-		 });
-		 
-	});
-	</script>
+<script>
+    $(document).ready(function () {
+        var navoffeset = $(".agileits_header").offset().top;
+        $(window).scroll(function () {
+            var scrollpos = $(window).scrollTop();
+            if (scrollpos >= navoffeset) {
+                $(".agileits_header").addClass("fixed");
+            } else {
+                $(".agileits_header").removeClass("fixed");
+            }
+        });
+
+    });
+</script>
 <!-- //script-for sticky-nav -->
-	<div class="logo_products">
-		<div class="container">
-			<div class="w3ls_logo_products_left">
-				<h1><a href="index.html"><span>大米</span> 商店</a></h1>
-			</div>
-			<div class="w3ls_logo_products_left1">
-				<ul class="special_items">
-					<li><a href="">事件</a><i>/</i></li>
-					<li><a href="">我们</a><i>/</i></li>
-					<li><a href="">好卖</a><i>/</i></li>
-					<li><a href="">服务</a></li>
-				</ul>
-			</div>
-			<div class="w3ls_logo_products_left1">
-				<ul class="phone_email">
-					<li><i class="fa fa-phone" aria-hidden="true"></i>(+86) 1522 5990 823</li>
-					<li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="">15225950823@163.com</a></li>
-				</ul>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
+<div class="logo_products">
+    <div class="container">
+        <div class="w3ls_logo_products_left">
+            <h1><a href="index.html"><span>大米</span> 商店</a></h1>
+        </div>
+        <div class="w3ls_logo_products_left1">
+            <ul class="special_items">
+                <li><a href="">事件</a><i>/</i></li>
+                <li><a href="">我们</a><i>/</i></li>
+                <li><a href="">好卖</a><i>/</i></li>
+                <li><a href="">服务</a></li>
+            </ul>
+        </div>
+        <div class="w3ls_logo_products_left1">
+            <ul class="phone_email">
+                <li><i class="fa fa-phone" aria-hidden="true"></i>(+86) 1522 5990 823</li>
+                <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="">15225950823@163.com</a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
 <!-- //header -->
 <!-- banner -->
-	<div class="banner">
-		<div class="w3l_banner_nav_left">
-			<nav class="navbar nav_bottom">
-			 <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
-			  <div class="navbar-header nav_2">
-				  <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				  </button>
-			   </div>
-			   <!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
-				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-					<ul class="nav navbar-nav nav_1">
-						<li><a href="person.html">个 人 中 心</a></li>
-						<li><a href="single.html">试 吃 产 品</a></li>
-						<li><a href="car.html">购 物 车</a></li>
-						<li><a href="">认 养 良 田</a></li>
+<div class="banner">
+    <div class="w3l_banner_nav_left">
+        <nav class="navbar nav_bottom">
+            <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+            <div class="navbar-header nav_2">
+                <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
+                        data-target="#bs-megadropdown-tabs">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+            <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                <ul class="nav navbar-nav nav_1">
+                    <li><a href="person.html">个 人 中 心</a></li>
+                    <li><a href="single.html">试 吃 产 品</a></li>
+                    <li><a href="car.html">购 物 车</a></li>
+                    <li><a href="">认 养 良 田</a></li>
 
-					</ul>
-				 </div>
+                </ul>
+            </div>
 
-			</nav>
-		</div>
-		<div class="w3l_banner_nav_right">
-			<section class="slider">
-				<div class="flexslider">
-					<ul class="slides">
-						<li>
-							<!--style.css 308行-->
-							<div class="w3l_banner_nav_right_banner">
-								<h3>让你的 <span>大米</span> 吃的健康.</h3>
-								<div class="more">
-									<a href="" class="button--saqui button--round-l button--text-thick" data-text="Shop now">查看详情</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="w3l_banner_nav_right_banner1">
-								<h3>世界最好的食物 <span>难道</span> 不是大米吗？</h3>
-								<div class="more">
-									<a href="" class="button--saqui button--round-l button--text-thick" data-text="Shop now">查看详情</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="w3l_banner_nav_right_banner2">
-								<h3>特惠 <i>半价</i> 试吃</h3>
-								<div class="more">
-									<a href="" class="button--saqui button--round-l button--text-thick" data-text="Shop now">查看详情</a>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</section>
-			<!-- flexSlider -->
-				<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
-				<script defer src="js/jquery.flexslider.js"></script>
-				<script type="text/javascript">
-				$(window).load(function(){
-				  $('.flexslider').flexslider({
-					animation: "slide",
-					start: function(slider){
-					  $('body').removeClass('loading');
-					}
-				  });
-				});
-			  </script>
-			<!-- //flexSlider -->
-		</div>
-		<div class="clearfix"></div>
-	</div>
+
+        </nav>
+    </div>
+    <div class="w3l_banner_nav_right">
+        <section class="slider">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <!--308行-->
+                        <div class="w3l_banner_nav_right_banner">
+                            <!--<h3>让你的 <span>大米</span> 吃的健康.</h3>
+                            <div class="more">
+                                <a href="" class="button&#45;&#45;saqui button&#45;&#45;round-l button&#45;&#45;text-thick" data-text="Shop now">查看详情</a>
+                            </div>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w3l_banner_nav_right_banner1">
+                            <!--<h3>让你的 <span>大米</span> 吃的健康.</h3>
+                            <div class="more">
+                                <a href="" class="button&#45;&#45;saqui button&#45;&#45;round-l button&#45;&#45;text-thick" data-text="Shop now">查看详情</a>
+                            </div>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w3l_banner_nav_right_banner2">
+                            <!--<h3>特惠 <i>半价</i> 试吃</h3>
+                            <div class="more">
+                                <a href="" class="button&#45;&#45;saqui button&#45;&#45;round-l button&#45;&#45;text-thick" data-text="Shop now">查看详情</a>
+                            </div>-->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- flexSlider -->
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property=""/>
+        <script defer src="js/jquery.flexslider.js"></script>
+        <script type="text/javascript">
+            $(window).load(function () {
+                $('.flexslider').flexslider({
+                    animation: "slide",
+                    start: function (slider) {
+                        $('body').removeClass('loading');
+                    }
+                });
+            });
+        </script>
+        <!-- //flexSlider -->
+    </div>
+    <div class="clearfix"></div>
+</div>
+
 <!-- banner -->
-	<div class="banner_bottom">
-			<div class="wthree_banner_bottom_left_grid_sub">
-			</div>
-			<div class="wthree_banner_bottom_left_grid_sub1">
-				<div class="col-md-4 wthree_banner_bottom_left">
-					<div class="wthree_banner_bottom_left_grid">
-						<img src="images/4.jpg" alt=" " class="img-responsive" />
-						<div class="wthree_banner_bottom_left_grid_pos">
-							<h4> <span>特惠！</span></h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 wthree_banner_bottom_left">
-					<div class="wthree_banner_bottom_left_grid">
-						<img src="images/5.jpg" alt=" " class="img-responsive" />
-						<div class="wthree_banner_btm_pos">
-							<h3> <span>引进最好的</span>  <i>大米</i></h3>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 wthree_banner_bottom_left">
-					<div class="wthree_banner_bottom_left_grid">
-						<img src="images/6.jpg" alt=" " class="img-responsive" />
-						<div class="wthree_banner_btm_pos1">
-							<h3><span>试吃 半价</span></h3>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"> </div>
-	</div>
+<div class="banner_bottom">
+    <div class="wthree_banner_bottom_left_grid_sub">
+    </div>
+    <div class="wthree_banner_bottom_left_grid_sub1">
+        <div class="col-md-4 wthree_banner_bottom_left">
+            <div class="wthree_banner_bottom_left_grid">
+                <img src="images/4.jpg" alt=" " class="img-responsive"/>
+                <div class="wthree_banner_bottom_left_grid_pos">
+                    <h4><span>特惠！</span></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 wthree_banner_bottom_left">
+            <div class="wthree_banner_bottom_left_grid">
+                <img src="images/5.jpg" alt=" " class="img-responsive"/>
+                <div class="wthree_banner_btm_pos">
+                    <h3><span>引进最好的</span> <i>大米</i></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 wthree_banner_bottom_left">
+            <div class="wthree_banner_bottom_left_grid">
+                <img src="images/6.jpg" alt=" " class="img-responsive"/>
+                <div class="wthree_banner_btm_pos1">
+                    <h3><span>试吃 半价</span></h3>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
 <!-- top-brands -->
-	<div class="top-brands">
-		<div class="container">
-			<h3>热 门 商 品</h3>
-			<div class="agile_top_brands_grids">
-				<div class="col-md-3 top_brand_left">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="tag"><img src="images/tag.png" alt=" " class="img-responsive" /></div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block" >
-										<div class="snipcart-thumb">
-											<a href="single.html"><img title=" " alt=" " src="images/1.png" /></a>		
-											<p>有机大米</p>
-											<h4>$20 <span>$20.00</span></h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="1" data-name="有机大米" data-gnum="1004" data-summary="summary 1" data-price="7.99" data-quantity="1" data-image="images/1.png">点击添加购物车</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 top_brand_left">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block" >
-										<div class="snipcart-thumb">
-											<a href="single.html"><img title=" " alt=" " src="images/3.png" /></a>		
-											<p>富硒大米</p>
-											<h4>$20 <span>$25.00</span></h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="2" data-name="富硒大米" data-gnum="1003" data-summary="summary 2" data-price="11.99" data-quantity="1" data-image="images/3.png">点击添加购物车</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 top_brand_left">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="images/2.png" alt=" " class="img-responsive" /></a>
-											<p>有机大米（精装）</p>
-											<h4>$8.00 <span>$10.00</span></h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="3" data-name="有机大米（精装）" data-gnum="1001" data-summary="summary 3" data-price="8.00" data-quantity="1" data-image="images/2.png">点击添加购物车</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 top_brand_left">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="images/4.png" alt=" " class="img-responsive" /></a>
-											<p>富硒大米（精装）</p>
-											<h4>$10.00 <span>$11.00</span></h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="4" data-name="富硒大米（精装）" data-gnum="1000" data-summary="summary 4"  data-price="10" data-quantity="1" data-image="images/4.png">点击添加购物车</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
+
+<div class="top-brands">
+    <div class="container">
+        <h3>热 门 商 品</h3>
+        <div id="indexH3" class="agile_top_brands_grids">
+<!--            <div class="col-md-3 top_brand_left">
+                <div class="hover14 column">
+                    <div class="agile_top_brand_left_grid">
+                        <div class="tag"><img src="images/tag.png" alt=" " class="img-responsive"/></div>
+                        <div class="agile_top_brand_left_grid1">
+                            <figure>
+                                <div class="snipcart-item block">
+                                    <div class="snipcart-thumb">
+                                        <a href="single.html"><img title=" " alt=" " src="images/1.png"/></a>
+                                        <p>有机大米</p>
+                                        <h4>$20 <span>$20.00</span></h4>
+                                    </div>
+                                    <div class="snipcart-details top_brand_home_details">
+                                        <button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="1"
+                                                data-name="有机大米" data-summary="summary 1" data-price="20"
+                                                data-quantity="1" data-image="images/1.png">点击添加购物车
+                                        </button>
+                                    </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
 <!-- //top-brands -->
 
 <!-- fresh-vegetables -->
-	<div class="fresh-vegetables">
-		<div class="container">
-			<h3>试吃产品</h3>
+<div class="fresh-vegetables">
+    <div class="container">
+        <h3>试吃产品</h3>
 
-				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
-					<div class="col-md-4 w3l_fresh_vegetables_grid">
-						<div class="w3l_fresh_vegetables_grid1">
-							<img src="images/8.jpg" alt=" " class="img-responsive" />
-						</div>
-					</div>
-					<div class="col-md-4 w3l_fresh_vegetables_grid">
-						<div class="w3l_fresh_vegetables_grid1">
-							<div class="w3l_fresh_vegetables_grid1_rel">
-								<img src="images/7.jpg" alt=" " class="img-responsive" />
-								<div class="w3l_fresh_vegetables_grid1_rel_pos">
-									<div class="more m1">
-										<a href="" class="button--saqui button--round-l button--text-thick" data-text="Shop now">查看详情</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="w3l_fresh_vegetables_grid1_bottom">
-							<img src="images/10.jpg" alt=" " class="img-responsive" />
-							<div class="w3l_fresh_vegetables_grid1_bottom_pos">
-								<h5>不一样的  体验</h5>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 w3l_fresh_vegetables_grid">
-						<div class="w3l_fresh_vegetables_grid1">
-							<img src="images/9.jpg" alt=" " class="img-responsive" />
-						</div>
-						<div class="w3l_fresh_vegetables_grid1_bottom">
-							<img src="images/11.jpg" alt=" " class="img-responsive" />
-						</div>
-					</div>
-					<div class="clearfix"> </div>
-					<div class="agileinfo_move_text">
-						<div class="agileinfo_marquee">
-							<h4>试吃 <span class="blink_me">五折</span>分享即可获得试吃资格~</h4>
-						</div>
-						<div class="agileinfo_breaking_news">
-							<span> </span>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
+        <div class="col-md-9 w3l_fresh_vegetables_grid_right">
+            <div class="col-md-4 w3l_fresh_vegetables_grid">
+                <div class="w3l_fresh_vegetables_grid1">
+                    <img src="images/8.jpg" alt=" " class="img-responsive"/>
+                </div>
+            </div>
+            <div class="col-md-4 w3l_fresh_vegetables_grid">
+                <div class="w3l_fresh_vegetables_grid1">
+                    <div class="w3l_fresh_vegetables_grid1_rel">
+                        <img src="images/7.jpg" alt=" " class="img-responsive"/>
+                        <div class="w3l_fresh_vegetables_grid1_rel_pos">
+                            <div class="more m1">
+                                <a href="" class="button--saqui button--round-l button--text-thick"
+                                   data-text="Shop now">查看详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3l_fresh_vegetables_grid1_bottom">
+                    <img src="images/10.jpg" alt=" " class="img-responsive"/>
+                    <div class="w3l_fresh_vegetables_grid1_bottom_pos">
+                        <h5>不一样的 体验</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 w3l_fresh_vegetables_grid">
+                <div class="w3l_fresh_vegetables_grid1">
+                    <img src="images/9.jpg" alt=" " class="img-responsive"/>
+                </div>
+                <div class="w3l_fresh_vegetables_grid1_bottom">
+                    <img src="images/11.jpg" alt=" " class="img-responsive"/>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="agileinfo_move_text">
+                <div class="agileinfo_marquee">
+                    <h4>试吃 <span class="blink_me">五折</span>分享即可获得试吃资格~</h4>
+                </div>
+                <div class="agileinfo_breaking_news">
+                    <span> </span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+</div>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script>
-$(document).ready(function(){
-    $(".dropdown").hover(            
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-            $(this).toggleClass('open');        
-        },
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-            $(this).toggleClass('open');       
-        }
-    );
-});
+    $(document).ready(function () {
+        $(".dropdown").hover(
+            function () {
+                $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                $(this).toggleClass('open');
+            },
+            function () {
+                $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                $(this).toggleClass('open');
+            }
+        );
+    });
 </script>
 <!-- here stars scrolling icon -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-				};
-			*/
-								
-			$().UItoTop({ easingType: 'easeOutQuart' });
-								
-			});
-	</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*var defaults = {
+        containerID: 'toTop', // fading element id
+        containerHoverID: 'toTopHover', // fading element hover id
+        scrollSpeed: 1200,
+        easingType: 'linear'
+        };*/
+        $().UItoTop({easingType: 'easeOutQuart'});
+
+    });
+</script>
 <!-- //here ends scrolling icon -->
 <script type='text/javascript' src="js/jquery.mycart.js"></script>
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript">
-  $(function () {
+    $(function () {
 
-    var goToCartIcon = function($addTocartBtn){
-      var $cartIcon = $(".my-cart-icon");
-      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
-      $addTocartBtn.prepend($image);
-      var position = $cartIcon.position();
-      $image.animate({
-	  
-      }, 500 , "linear", function() {
-        $image.remove();
-      });
-    }
+        var goToCartIcon = function ($addTocartBtn) {
+            var $cartIcon = $(".my-cart-icon");
+            var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({
+                "position": "fixed",
+                "z-index": "999"
+            });
+            $addTocartBtn.prepend($image);
+            var position = $cartIcon.position();
+            $image.animate({}, 500, "linear", function () {
+                $image.remove();
+            });
+        }
 
-    $('.my-cart-btn').myCart({
-      classCartIcon: 'my-cart-icon',
-      classCartBadge: 'my-cart-badge',
-      affixCartIcon: true,
-      checkoutCart: function(products) {
-        $.each(products, function(){
-          console.log(this);
+       /* $('.my-cart-btn').myCart({
+            classCartIcon: 'my-cart-icon',
+            classCartBadge: 'my-cart-badge',
+            affixCartIcon: true,
+            checkoutCart: function (products) {
+                $.each(products, function () {
+                    console.log(this);
+                });
+            },
+            clickOnAddToCart: function ($addTocart) {
+                goToCartIcon($addTocart);
+            },
+            getDiscountPrice: function (products) {
+                var total = 0;
+                $.each(products, function () {
+                    total += this.quantity * this.price;
+                });
+                return total * 1;
+            }
         });
-      },
-      clickOnAddToCart: function($addTocart){
-        goToCartIcon($addTocart);
-      },
-      getDiscountPrice: function(products) {
-        var total = 0;
-        $.each(products, function(){
-          total += this.quantity * this.price;
+*/
+
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
         });
-        return total * 1;
-      }
+
+        var path = "/" + location.pathname.split("/")[1];
+        $.get(
+            path + "/FwGoods/recommend",
+            function (data) {
+                $.each(JSON.parse(data), function (i, obj) {
+                    if (i == 0) {
+                        $('.w3l_banner_nav_right_banner').append(
+                            '<h3 style="margin-left: 360px;position: relative;right: -140px;">' + obj.gDetail + '</h3>' +
+                            '<div class="more">' +
+                            '<a href="single.html?gNum=' + obj.gNum + '" class="button--saqui button--round-l button--text-thick" data-text="Shop now">查看详情</a>' +
+                            '</div>'
+                        );
+                    }
+                    if (i == 1) {
+                        $('.w3l_banner_nav_right_banner1').append(
+                            '<h3 style="margin-left: 360px;position: relative;right: -140px;">' + obj.gDetail + '</h3>' +
+                            '<div class="more">' +
+                            '<a href="single.html?gNum=' + obj.gNum + '" class="button--saqui button--round-l button--text-thick" data-text="Shop now">查看详情</a>' +
+                            '</div>'
+                        );
+                    }
+                    if (i == 2) {
+                        $('.w3l_banner_nav_right_banner2').append(
+                            '<h3 style="margin-left: 360px;position: relative;right: -140px;">' + obj.gDetail + '</h3>' +
+                            '<div class="more">' +
+                            '<a href="single.html?gNum=' + obj.gNum + '" class="button--saqui button--round-l button--text-thick" data-text="Shop now">查看详情</a>' +
+                            '</div>'
+                        );
+                    }
+
+                });
+            }
+        );
+        $.get(
+            path + "/BgGoods/findAllGoods",
+            function (data) {
+                console.log(data);
+                $.each(JSON.parse(data), function (i, obj) {
+                    $("#indexH3").append(
+                        '<div class="col-md-3 top_brand_left" style="margin-bottom: 40px;">' +
+                        '<div class="hover14 column">' +
+                        '<div class="agile_top_brand_left_grid">' +
+                        /*'<div class="tag"><img src="'+obj.gImg+'" alt=" " class="img-responsive" /></div>'+*/
+                        '<div class="agile_top_brand_left_grid1">' +
+                        '<figure>' +
+                        '<div class="snipcart-item block" >' +
+                        '<div class="snipcart-thumb">' +
+                        '<a href="single.html?gNum=' + obj.gNum + '"><img style="width: 200px; height: 250px;"  src="../background/' + obj.gImg + '" /></a>' +
+                        '<p>' + obj.gName + '</p>' +
+                        '<h4>￥' + obj.gOffer + '<span>￥' + obj.gPrice + '</span></h4>' +
+                        '</div>' +
+                        '<div class="snipcart-details top_brand_home_details">' +
+                        '<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="' + (i + 1) + '" data-name="' + obj.gName + '" data-summary="summary '+(i+1)+'" data-price="' + obj.gOffer + '" data-quantity="1" data-image="../background/' + obj.gImg + '">点击添加购物车</button>' +
+                        /*'<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="'+(i+1)+'" data-name="Fortune sunflower oil" data-summary="summary 1" data-price="7.99" data-quantity="1" data-image="images/1.png">点击添加购物车</button>'+*/
+                        '</div>' +
+                        '</div>' +
+                        '</figure>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                    );
+
+                    }
+                )
+                $('.my-cart-btn').myCart({
+                    classCartIcon: 'my-cart-icon',
+                    classCartBadge: 'my-cart-badge',
+                    affixCartIcon: true,
+                    checkoutCart: function(products) {
+                        $.each(products, function(){
+
+                        });
+                    },
+                    clickOnAddToCart: function($addTocart){
+                        goToCartIcon($addTocart);
+                    },
+                    getDiscountPrice: function(products) {
+                        var total = 0;
+                        $.each(products, function(){
+                            total += this.quantity * this.price;
+                        });
+                        return total * 1;
+                    }
+                });
+            }
+        );
+
     });
-
-  });
-  </script>
+</script>
 </body>
 </html>
+

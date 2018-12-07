@@ -34,11 +34,13 @@ public class GoodsEntity {
 
     @Basic
     @Column(name = "p_num")
-    public int getpNum() {
+
+    public Integer getpNum() {
         return pNum;
     }
 
-    public void setpNum(int pNum) {
+    public void setpNum(Integer pNum) {
+
         this.pNum = pNum;
     }
 

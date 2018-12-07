@@ -11,40 +11,45 @@
     <script src="js/jquery.js"></script>
     <script src="js/pintuer.js"></script>
 </head>
-<body>
-<form method="post" action="" id="listform">
+<body onload="getEvaluaation()">
+<div  id="listform">
     <div class="panel admin-panel">
         <div class="panel-head"><strong class="icon-reorder">评价管理</strong></div>
         <div class="padding border-bottom">
             <ul class="search" style="padding-left:10px;">
                 <!--<li> <a class="button border-main icon-plus-square-o" href="#">用户操作</a> </li>-->
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="s_ishome"  onchange="changesearch()" style="width:76px;margin-left: 10px; height:30px; display:inline-block ">
-                        <option value="1">订单号</option>
-                        <option value="0">用户账号</option>
+                    <select name="num" class="reply" style="width:76px;margin-left: 10px; height:30px; display:inline-block ">
+                        <option value="">回复状态</option>
+                        <option value="已回复">已回复</option>
+                        <option value="未回复">未回复</option>
                     </select>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <strong>评分区间</strong><input id="start-time" type="text" style="width:150px; height:30px;display:inline-block ;margin-left: 10px">&nbsp;&nbsp;至<input id="end-time" type="text" style="width:150px; height:30px;display:inline-block ;margin-left: 10px">
+                    <strong>评分区间</strong><input id="minStar" type="text" style="width:150px; height:30px;display:inline-block ;margin-left: 10px">&nbsp;&nbsp;至<input id="maxStar" type="text" style="width:150px; height:30px;display:inline-block ;margin-left: 10px">
                 </li>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                 <li>
-                    <input type="text" placeholder="请输入搜索关键字" name="keywords" class="input" style="width:250px;margin-left: 30px;margin-right: 10px; line-height:17px;display:inline-block " />
-                    <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
+                    商品编号：
+                    <input type="text" placeholder="请输入搜索关键字" name="keywords" id="keywords" class="input" style="width:250px;margin-right: 10px; line-height:17px;display:inline-block " />
+                    <a href="javascript:void(0)" class="button border-main icon-search" onclick="searcheval()" > 搜索</a></li>
             </ul>
         </div>
         <table class="table table-hover text-center">
             <tr>
-                <th width="12%">序号</th>
-                <th width="12%">订单号</th>
-                <th width="12%">用户名</th>
-                <th width="12%">手机号</th>
-                <th width="10%">评分</th>
+                <th width="6%">序号</th>
+                <th width="8%">产品编号</th>
+                <th width="8%">订单号</th>
+                <th width="8%">用户名</th>
+                <th width="8%">手机号</th>
+                <th width="8%">评分</th>
                 <th width="14%">评论</th>
-                <th width="12%">评论时间</th>
+                <th width="11%">评论时间</th>
+                <th width="13%">回复内容</th>
                 <th width="10%">操作</th>
             </tr>
-            <tbody name="list" id="tt">
-            <tr>
+            <tbody name="list" class="tt" id="tt">
+            <!--<tr>
                 <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
                 <td width="10%"><img src="images/11.jpg" alt="" width="70" height="50" /></td>
                 <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
@@ -53,9 +58,9 @@
                 <td> </td>
                 <td> </td>
                 <td><div class="button-group"> <a class="button border-main" href="#"><span class="icon-edit"></span>回复</a>  </div></td>
-            </tr>
+            </tr>-->
             </tbody>
-            <tr>
+           <!-- <tr>
                 <td >总共有<span></span>个评价</td>
                 <td> </td>
                 <td> </td>
@@ -64,25 +69,135 @@
                 <td> </td>
                 <td> </td>
                 <td>本页显示<span></span>个评价 </td>
-            </tr>
+            </tr>-->
             <tr>
-                <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <a href="">下一页</a><a href="">尾页</a> </div></td>
+                <td colspan="8"><div class="pagelist"> <button class="previous" onclick="previousPage()" >上一页</button>
+                    <button class="next" onclick="nextPage()" >下一页</button></div></td>
             </tr>
         </table>
     </div>
-</form>
+</div>
 <script type="text/javascript">
-
-    //搜索
-    function changesearch(){
-
+    var path="/"+location.pathname.split("/")[1];
+    var currentPage=1;
+    //删除当前已经存在的元素
+    function remove(){
+        var tb=document.getElementsByClassName("tt")[0];
+        var leng=tb.rows.length;
+        for (var i= 0; i <leng;i++) {
+            tb.deleteRow(0);
+        }
+    }
+    //下一页
+    function nextPage(){
+        //让当前页数+1；
+        currentPage++;
+        //请求网络
+        if(($('#minStar').val()!=""&&$('#maxStar').val()!="")||$('.reply').val()!=""||$('#keywords').val()!=""){
+            searcheval();
+        }else{
+            getEvaluaation();
+        }
     }
 
-    //单个删除
-    function del(id,mid,iscid){
-        if(confirm("您确定要删除吗?")){
-
+    function previousPage(){
+        //1判断currentPage==1;
+        if(currentPage==1)return;
+        //currentPage-1;
+        currentPage--;
+        //网络请求
+        if(($('#minStar').val()!=""&&$('#maxStar').val()!="")||$('.reply').val()!=""||$('#keywords').val()!=""){
+            searcheval();
+        }else{
+            getEvaluaation();
         }
+    }
+    //添加
+    function addAtt(){
+        var btn=document.getElementsByClassName("next")[0];
+        btn.setAttribute("disabled", "disabled");
+    }
+    //移除
+    function removeAtt(){
+        var btn=document.getElementsByClassName("next")[0];
+        btn.removeAttribute("disabled");
+    }
+    function getEvaluaation() {
+
+        $.get(
+            path+"/BgEva/findEva",
+            {"currentPage":currentPage},
+            function (data) {
+                console.log(data);
+                if(data.length<5){
+                    addAtt();
+                }else{
+                    removeAtt();
+                }
+                remove();
+                getEva(data);
+            }
+        );
+    }
+    function getEva(data) {
+        $.each(JSON.parse(data),function(i,obj){
+            if(obj.eReply!=""){
+                $("#tt").append(
+                    '<tr>'+
+                    '<td>'+((i+1)+(currentPage-1)*5)+'</td>'+
+                    '<td>'+obj.gNum+'</td>'+
+                    '<td>'+obj.oNum+'</td>'+
+                    '<td>'+obj.userEntity.uName+'</td>'+
+                    '<td>'+obj.userEntity.uPhone+'</td>'+
+                    '<td>'+obj.eStar+'</td>'+
+                    '<td>'+obj.eEval+'</td>'+
+                    '<td>'+new Date(parseInt(obj.eTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+'</td>'+
+                    '<td>'+obj.eReply+'</td>'+
+                    '<td> <div class="button-group"> <a class="button border-main" href="#">'+
+                    '<span class="icon-edit">'+
+                    '</span>已回复</a>'+
+                    '</div>'+
+                    '</td>'+
+                    '</tr>');
+            }else{
+                $("#tt").append(
+                    '<tr>'+
+                    '<td>'+((i+1)+(currentPage-1)*5)+'</td>'+
+                    '<td>'+obj.gNum+'</td>'+
+                    '<td>'+obj.oNum+'</td>'+
+                    '<td>'+obj.userEntity.uName+'</td>'+
+                    '<td>'+obj.userEntity.uPhone+'</td>'+
+                    '<td>'+obj.eStar+'</td>'+
+                    '<td>'+obj.eEval+'</td>'+
+                    '<td>'+new Date(parseInt(obj.eTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+'</td>'+
+                    '<td>'+obj.eReply+'</td>'+
+                    '<td> <div class="button-group"> <a class="button border-main" href="reply.html?gNum='+obj.gNum+'&oNum='+obj.oNum+'&eEval='+obj.eEval+'&uName='+obj.userEntity.uName+'&eId='+obj.eId+'">'+
+                    '<span class="icon-edit">'+
+                    '</span>回复</a>'+
+                    '</div>'+
+                    '</td>'+
+                    '</tr>');
+            }
+        });
+    }
+
+    function searcheval() {
+        $.get(
+            path+"/BgEva/findSearchEva",
+            {"page":currentPage,"minStar":$('#minStar').val(),"maxStar":$('#maxStar').val(),"gNum":$('#keywords').val(),"eReply":$('.reply').val()},
+            /*{"currentPage":currentPage},*/
+            function (data) {
+                console.log(data);
+                if(data.length<5){
+                    addAtt();
+                }else{
+                    removeAtt();
+                }
+                remove();
+                getEva(data);
+            }
+        );
+
     }
 
 

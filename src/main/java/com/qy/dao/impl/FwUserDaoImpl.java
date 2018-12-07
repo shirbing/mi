@@ -57,4 +57,9 @@ public class FwUserDaoImpl implements FwUserDao {
         hibernateTemplate.update(userEntity2);
         return true;
     }
+
+    @Override
+    public UserEntity personInfo(UserEntity userEntity) {
+        return hibernateTemplate.findByExample(userEntity).get(0);
+    }
 }

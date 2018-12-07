@@ -6,11 +6,13 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "logistics", schema = "secondproject")
+
+@Table(name = "logistics", schema = "secondproject", catalog = "")
 @DynamicInsert(value = true)
 public class LogisticsEntity {
     private int lId;
-    private int lNum;
+    private Integer lNum;
+
     private Timestamp lTime;
     private String lName;
     private int oId;
@@ -27,11 +29,13 @@ public class LogisticsEntity {
 
     @Basic
     @Column(name = "l_num")
-    public int getlNum() {
+
+    public Integer getlNum() {
         return lNum;
     }
 
-    public void setlNum(int lNum) {
+    public void setlNum(Integer lNum) {
+
         this.lNum = lNum;
     }
 

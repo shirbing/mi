@@ -11,7 +11,7 @@
 <script src="js/jquery.js"></script>
 <script src="js/pintuer.js"></script>
 </head>
-<body>
+<body onload="getName()">
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 修改会员密码</strong></div>
   <div class="body-content">
@@ -20,11 +20,11 @@
 
       <div class="form-group">
         <div class="label">
-          <label for="sitename">管理员帐号：</label>
+          <label for="sitename" >管理员帐号：</label>
         </div>
         <div class="field">
           <label style="line-height:33px;">
-
+              <span id="getName"></span>
           </label>
         </div>
       </div>      
@@ -68,9 +68,8 @@
 </div>
 </body>
 <script type="text/javascript">
+    var path = "/" + location.pathname.split("/")[1];
     $(document).ready(function () {
-        var path = "/" + location.pathname.split("/")[1];
-
         $("#changepwd").click(function () {
             $.get(path+"/login/isaPwd",{"oldpwd":$("#mpass").val(),"newpwd":$("#newpass").val(),"repwd":$("#newpass").val()},
                 function (data) {
@@ -90,7 +89,15 @@
                 },"JSON");
         });
     });
-
+    function getName() {
+        $.get(
+            path+"/login/getName",
+            function (data) {
+                $('#getName').html(JSON.parse(data).aName);
+            }
+            
+        );
+    }
 
 </script>
 </html>

@@ -8,7 +8,7 @@ import java.util.List;
 public interface BgGoodsDao {
     public boolean saveGoods(GoodsEntity goodsEntity);
     public boolean updateGoods(GoodsEntity goodsEntity);
-    public List<GoodsEntity> findAllGoods(int currentPage);
+    public List<GoodsEntity> findAllGoods();
     public boolean goodsNumIsExist(GoodsEntity goodsEntity);
     public boolean productIsExist(ProductEntity productEntity);
     public boolean deteleGoods(GoodsEntity goodsEntity);

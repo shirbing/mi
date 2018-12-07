@@ -29,11 +29,25 @@
                 $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
             });
         });
+        var path="/"+location.pathname.split("/")[1];
+        function personInfo() {
+            $.get(
+                path+"/FwUser/personInfo",
+                function (data) {
+                    console.log(data);
+                    $('#icon').attr("src",JSON.parse(data).uIcon);
+                    $('#username').html(JSON.parse(data).uName);
+                    $('#userPhone').html(JSON.parse(data).uPhone);
+                }
+            );
+        }
+
+
     </script>
     <!-- start-smoth-scrolling -->
 </head>
 
-<body>
+<body onload="personInfo()">
 <!-- header -->
 <div class="agileits_header">
     <div class="w3l_offers">
@@ -116,21 +130,23 @@
         <!-- login -->
         <div class="w3_login">
             <!-- 。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。 -->
-            <h3><img src="1.jpg" alt="" id="icon"></h3>
+            <h3><img src="" alt="" id="icon" style="width: 150px;height: 150px;position: relative;bottom: -30px;"></h3>
             <div class="w3_login_module">
                 <div class="module form-module">
                     <div class="toggle"><i class="fa fa-times fa-pencil"></i>
 
                     </div>
                     <div class="form">
-                        <div>名字：</div><br>
-                        <div>电话：</div><br>
+                        <div>名字：<span id="username"></span></div><br>
+                        <div>电话：<span id="userPhone"></span></div><br>
 
                         <!-- -。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。 -->
                         <!-- <form action="#" method="post"> -->
                         <a href="car.html"><input type="button" value="购物车"></a>
                         <a href="order.html"> <input type="button" value="我的订单"></a>
+
                         <a href="address.html"> <input type="button" value="收货地址"></a>
+
                         <a href="re-person.html"> <input type="button" value="修改资料"></a>
 
 
@@ -152,7 +168,7 @@
 
 
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/bootstrap.min.js"></script>-->
 <script>
     $(document).ready(function(){
         $(".dropdown").hover(
@@ -167,7 +183,7 @@
         );
     });
 </script>
-<script type="text/javascript" id="snipcart" src="js/snipcart.js" data-api-key="ZGQxNzVjZTItOWRmNS00YjJhLTlmNGUtMDE4NjdiY2RmZGNj"></script>
+<script type="text/javascript" id="snipcart"  data-api-key="ZGQxNzVjZTItOWRmNS00YjJhLTlmNGUtMDE4NjdiY2RmZGNj"></script>
 <!-- here stars scrolling icon -->
 <script type="text/javascript">
     $(document).ready(function() {

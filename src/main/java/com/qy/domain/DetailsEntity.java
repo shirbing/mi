@@ -13,7 +13,7 @@ public class DetailsEntity {
     private int oId;
     private double dPrice;
     private double dDiscount;
-    private int dCount;
+    private Integer dCount;
 
     @Id
     @Column(name = "d_id")
@@ -67,11 +67,11 @@ public class DetailsEntity {
 
     @Basic
     @Column(name = "d_count")
-    public int getdCount() {
+    public Integer getdCount() {
         return dCount;
     }
 
-    public void setdCount(int dCount) {
+    public void setdCount(Integer dCount) {
         this.dCount = dCount;
     }
 

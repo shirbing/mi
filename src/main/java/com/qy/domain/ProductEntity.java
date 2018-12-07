@@ -5,12 +5,14 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 
 @Entity
+
 @Table(name = "product", schema = "secondproject")
+
 @DynamicInsert(value = true)
 public class ProductEntity {
     private int pId;
     private String pStyle;
-    private int pNum;
+    private Integer pNum;
     private String pName;
     private String pPackage;
     private Integer pWeight;
@@ -39,11 +41,11 @@ public class ProductEntity {
 
     @Basic
     @Column(name = "p_num")
-    public int getpNum() {
+    public Integer getpNum() {
         return pNum;
     }
 
-    public void setpNum(int pNum) {
+    public void setpNum(Integer pNum) {
         this.pNum = pNum;
     }
 
@@ -88,7 +90,9 @@ public class ProductEntity {
     }
 
     @Basic
+
     @Column(name = "p_unit")
+
     public String getpUnit() {
         return pUnit;
     }

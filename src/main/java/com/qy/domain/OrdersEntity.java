@@ -6,7 +6,9 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+
 @Table(name = "orders", schema = "secondproject")
+
 @DynamicInsert(value = true)
 public class OrdersEntity {
     private int oId;
@@ -14,7 +16,9 @@ public class OrdersEntity {
     private String uName;
     private String gNum;
     private double oMoney;
+
     private Double oPost;
+
     private String oMsg;
     private String ggName;
     private Timestamp oOrdertime;
@@ -76,11 +80,13 @@ public class OrdersEntity {
 
     @Basic
     @Column(name = "o_post")
+
     public Double getoPost() {
         return oPost;
     }
 
     public void setoPost(Double oPost) {
+
         this.oPost = oPost;
     }
 
@@ -173,10 +179,12 @@ public class OrdersEntity {
 
         if (oId != that.oId) return false;
         if (Double.compare(that.oMoney, oMoney) != 0) return false;
+
         if (oNum != null ? !oNum.equals(that.oNum) : that.oNum != null) return false;
         if (uName != null ? !uName.equals(that.uName) : that.uName != null) return false;
         if (gNum != null ? !gNum.equals(that.gNum) : that.gNum != null) return false;
         if (oPost != null ? !oPost.equals(that.oPost) : that.oPost != null) return false;
+
         if (oMsg != null ? !oMsg.equals(that.oMsg) : that.oMsg != null) return false;
         if (ggName != null ? !ggName.equals(that.ggName) : that.ggName != null) return false;
         if (oOrdertime != null ? !oOrdertime.equals(that.oOrdertime) : that.oOrdertime != null) return false;
@@ -199,7 +207,9 @@ public class OrdersEntity {
         result = 31 * result + (gNum != null ? gNum.hashCode() : 0);
         temp = Double.doubleToLongBits(oMoney);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+
         result = 31 * result + (oPost != null ? oPost.hashCode() : 0);
+
         result = 31 * result + (oMsg != null ? oMsg.hashCode() : 0);
         result = 31 * result + (ggName != null ? ggName.hashCode() : 0);
         result = 31 * result + (oOrdertime != null ? oOrdertime.hashCode() : 0);

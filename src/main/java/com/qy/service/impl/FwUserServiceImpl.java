@@ -41,4 +41,9 @@ public class FwUserServiceImpl implements FwUserService {
     public boolean updateUser(UserEntity userEntity, UserEntity userEntity1) {
         return fwUserDao.updateUser(userEntity,userEntity1);
     }
+
+    @Override
+    public UserEntity personInfo(UserEntity userEntity) {
+        return fwUserDao.personInfo(userEntity);
+    }
 }

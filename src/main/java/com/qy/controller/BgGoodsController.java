@@ -97,8 +97,8 @@ public class BgGoodsController {
     //列取所有商品
     @RequestMapping("/findAllGoods")
     @ResponseBody
-    public String findAllGoods(int currentPage){
-       List<GoodsEntity> goodsEntityList= bgGoodsService.findAllGoods(currentPage);
+    public String findAllGoods(){
+       List<GoodsEntity> goodsEntityList= bgGoodsService.findAllGoods();
         return JSON.toJSONString(goodsEntityList);
     }
     //删除商品
@@ -162,7 +162,7 @@ public class BgGoodsController {
     }
     @RequestMapping("/changeSearchGoods")
     @ResponseBody
-    public String changeSearchGoods(GoodsEntity a,ProductEntity productEntity,int currentPage){
+    public String changeSearchGoods(GoodsEntity a, ProductEntity productEntity, int currentPage){
 
         GoodsEntity goodsEntity=new GoodsEntity();
         if(a.getgRecommend()!=""){

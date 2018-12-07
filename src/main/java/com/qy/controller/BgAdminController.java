@@ -41,7 +41,12 @@ public class BgAdminController {
        return JSON.toJSONString(i);
     }
 
-
+@RequestMapping("/getName")
+@ResponseBody
+public String getName(HttpServletRequest request){
+        AdminEntity adminEntity=(AdminEntity) request.getSession().getAttribute("ADMIN_SESSION_KEY");
+        return JSON.toJSONString(adminEntity) ;
+}
 
 
 
