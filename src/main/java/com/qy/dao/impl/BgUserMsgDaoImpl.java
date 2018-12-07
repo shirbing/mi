@@ -2,7 +2,6 @@ package com.qy.dao.impl;
 
 import com.qy.dao.BgUserMsgDao;
 import com.qy.domain.UserEntity;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;

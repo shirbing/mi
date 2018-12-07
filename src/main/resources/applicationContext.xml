@@ -2,13 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--开启注解扫描功能-->
     <context:annotation-config></context:annotation-config>
@@ -18,10 +21,11 @@
     <context:component-scan base-package="com.qy.domain"></context:component-scan>
     <!--开启aop自动代理模式-->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-    <!--从上下文环境中读取db.properties配置文件-->
-    <context:property-placeholder location="classpath*:db.properties" ></context:property-placeholder>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <!--从上下文环境中读取db.properties配置文件-->
+    <context:property-placeholder location="classpath*:db.properties"></context:property-placeholder>
+
+    <bean id="dataSource"  class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${dbcp.driverClassName}"></property>
         <property name="url" value="${dbcp.url}"></property>
         <property name="username" value="${dbcp.username}"></property>
@@ -34,63 +38,63 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-
-    <!--配置Hibernate的SessionFactory-->
+    <!-- 配置Hibernate的SessionFactory -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <!--指定当前会话工厂使用的数据源-->
         <property name="dataSource" ref="dataSource"></property>
-        <!--<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>-->
-
         <!--指定实体类的位置-->
         <property name="packagesToScan"  value="com.qy.domain"/>
-
         <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/secondproject</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
+        <!-- <property name="annotatedClasses">
+             <list>
+                 <value>com.qy.domain.Province</value>
+             </list>
+         </property>-->
+        <!--<property name="hibernateProperties">
             <value>
-                <!--设置方言-->
                 hibernate.dialect=org.hibernate.dialect.MySQLDialect
-                <!--显示sql语句和设置格式-->
                 hibernate.show_sql=true
                 hibernate.format_sql=true
-                <!--使用二级缓存-->
-                <!--hibernate.cache.use_second_level_cache=true-->
-                <!--&lt;!&ndash;配置二级缓存服务商&ndash;&gt;-->
-                <!--hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory-->
-                <!--&lt;!&ndash;配置查询缓存&ndash;&gt;-->
-                <!--name="cache.use_query_cache=true-->
+                &lt;!&ndash;  hibernate.hbm2ddl.auto=create &ndash;&gt;
             </value>
-            <!--<props>-->
-                <!--<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/secondproject</prop>-->
-                <!--<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>-->
-            <!--</props>-->
-        </property>
+            <props>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/secondproject</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>-->
     </bean>
 
-    <!--配置HibernateTemplate-->
+    <!-- 配置 HibernateTemplate -->
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
-    <!--配置spring的声明性事务-->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <!--要根据hibernate的版本配置-->
+    <!-- 配置spring的声明性事务 -->
+    <bean  id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <!-- 要根据hibernate的版本配置 -->
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
-    <!--配置事务属性-->
+    <!-- 配置事务属性 -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
-            <tx:method name="re*" propagation="REQUIRED"/>
-            <tx:method name="*" propagation="NOT_SUPPORTED"/>
+            <tx:method name="save*"    propagation="REQUIRED"/>
+            <tx:method name="update*"  propagation="REQUIRED"/>
+            <tx:method name="delete*"  propagation="REQUIRED"/>
+            <tx:method name="*" propagation="NOT_SUPPORTED"></tx:method>
         </tx:attributes>
-
     </tx:advice>
-    <!--配置事务的切入点-->
+
+    <!-- 配置事务切入点 -->
     <aop:config>
-        <aop:pointcut id="pointCut" expression="execution(* com.qy.service.impl.*.*(..))"/>
+        <aop:pointcut expression="execution(* com.qy.service.impl.*.*(..))" id="pointCut"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut"/>
     </aop:config>
+
 
 </beans>

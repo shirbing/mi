@@ -121,13 +121,11 @@ public class BgGoodsDaoImpl implements BgGoodsDao {
     }
 
     @Override
-    public List<GoodsEntity> findSearchGoods(GoodsEntity goodsEntity, ProductEntity productEntity,int currentPage) {
-        /*Session session= hibernateTemplate.getSessionFactory().getCurrentSession();*/
-        System.out.println("-------------------");
+    public List<GoodsEntity> findSearchGoods(GoodsEntity goodsEntity, ProductEntity productEntity, int currentPage) {
+
         List<GoodsEntity> goodsEntityList=hibernateTemplate.findByExample(goodsEntity,(currentPage-1)*3,3);
 
-       /* List<GoodsEntity> goodsEntityList=session.createQuery("from GoodsEntity order by gId desc ").setFirstResult((currentPage-1)*3).setMaxResults(3).list();
-*/
+
         return goodsEntityList;
     }
 

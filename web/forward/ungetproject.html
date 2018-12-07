@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>未收货</title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <!--<script src="js/pintuer.js"></script>-->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <style type="text/css">
+        .labelsss{
+            margin-left: 20px;
+            margin-top: 30px;
+            font-size: 15px;
+        }
+
+    </style>
+
+</head>
+<script>
+    var currentPage=1;
+    var path="/"+location.pathname.split("/")[1];
+    //列表
+    function sendstate() {
+        $.get(path+"/state/sendstate",{"currentpage":currentPage},function (data) {
+            console.log(data);
+            if (data.length<5){
+                addAtt();
+            }else{
+                removeAtt();
+            }
+            remove();
+            ad(data);
+        });
+    }
+    //动态添加
+    function ad(data) {
+        $.each(JSON.parse(data),function (i,obj) {
+
+            $("#tt").append(
+                '<tr>'+
+                '<td>'+obj.oNum+'</td>'+
+                '<td>'+obj.sName+'</td>'+
+                '<td width="10%"><img src='+obj.sIcon+' alt="商品图片" width="70" height="50" /></td>'+
+                '<td>'+obj.sPrice+'</td>'+
+                '<td>'+obj.sNum+'</td>'+
+                '<td>'+obj.oMoney+'</td>'+
+                '<td>'+
+                '<a class="button border-main"  href="javascript:void(0)" onclick="('+obj.oId+')">'+
+                '<span class="icon-edit"></span>查看详情</a>'+
+                '<a class="button border-red" href="javascript:void(0)" onclick="deleteOrder('+obj.oId+')">'+
+                '<span class="icon-trash-o"></span>取消订单</a>'+
+                '<a class="button border-main"  href="javascript:void(0)" onclick="okOrder('+obj.oId+')">'+
+                '<span class="icon-edit"></span>确认收货</a>'+
+                '</td>'+
+                '</tr>'
+
+            )
+        });
+    } /*添加*/
+    function addAtt() {
+        var btn=document.getElementsByClassName("next")[0];
+        btn.setAttribute("disabled","disabled");
+    }
+    /*移除*/
+    function removeAtt() {
+        var btn=document.getElementsByClassName("next")[0];
+        btn.removeAttribute("disabled");
+    }
+    /*删除存在的元素*/
+    function remove() {
+        var tb = document.getElementsByClassName("tt")[0];
+        var leng = tb.rows.length;
+        for (var i = 0; i < leng; i++) {
+            tb.deleteRow(0);
+        }
+    }
+    //下一页
+    function nextPage(){
+        //让当前页数+1；
+        currentPage++;
+        //请求网络
+        listorders();
+    }
+    //上一页
+    function previousPage(){
+        //1判断currentPage==1;
+        if(currentPage==1)return;
+        //currentPage-1;
+        currentPage--;
+        //网络请求
+        listorders();
+    }
+
+
+
+    /*取消订单*/
+    function deleteOrder(oId) {
+        $.get(path+"/order/deleteOrder",{"oId":oId},function (data) {
+            console.log(data);
+            if (data==1){
+                alert("取消成功，返回个人中心");
+                window.location.href="order.html";
+            } else{
+                alert("操作失败");
+            }
+
+        });
+    }
+
+
+   /* /!*付款*!/
+    function paystateOrder(oId) {
+        $.get(path+"/order/paystateOrder",{"oId":oId},function (data) {
+            console.log(data);
+            if (data==1){
+                alert("付款成功");
+                window.location.href="list-order.html";
+            } else{
+                alert("操作失败");
+            }
+
+        });
+    }*/
+
+    /*收货*/
+    function okOrder(oId) {
+        $.get(path+"/order/okOrder",{"oId":oId},function (data) {
+            console.log(data);
+            if (data==1){
+                alert("收货成功");
+                window.location.href="unevaluate.html";
+            } else{
+                alert("操作失败");
+            }
+
+        });
+    }
+
+  /*  /!*评价*!/
+    function isevaluateOrder(oId) {
+        $.get(path+"/order/isevaluateOrder",{"oId":oId},function (data) {
+            console.log(data);
+            if (data==1){
+                alert("评价成功");
+                window.location.href="list-order.html";
+            } else{
+                alert("操作失败");
+            }
+
+        });
+    }*/
+</script>
+<body onload="sendstate()">
+<div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder">订单详情</strong></div>
+    <div class="labelsss">
+        <label></label><span class="ddh"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>全部订单</span>
+    </div>
+    <div class="labelsss">
+        <label></label><span class="yhzh"></span>
+    </div><br>
+    <table class="table table-hover text-center">
+        <tr>
+            <th width="10%">订单编号</th>
+            <!--<th width="5%">商品编号</th>-->
+            <th width="10%">商品名称</th>
+            <th width="10%">图片</th>
+            <th width="10%">价格</th>
+            <th width="10%">数量</th>
+            <th width="10%">订单金额</th>
+            <th width="20">操作</th>
+        </tr>
+        <tbody name="list" id="tt" class="tt">
+        <!-- <tr>
+             <td></td>
+             &lt;!&ndash;<td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>&ndash;&gt;
+             <td width="10%"><img src="images/11.jpg" alt="" width="50" height="50" /></td>
+             <td></td>
+             <td><font color="#00CC99">首页</font></td>
+             <td>2016-07-01</td>
+             <td> </td>
+             <td> </td>
+             <td><div class="button-group">
+                 <a class="button border-main" href="detail-order.html"><span class="icon-edit"></span>详情</a>
+
+                 <a class="button border-red" href="javascript:void(0)" onclick=""><span class="icon-trash-o"></span>取消订单</a>
+
+                 <a class="button border-main" href="money.html"><span class="icon-edit"></span>付款</a>
+                 &lt;!&ndash;<a class="button border-main" href="add.html"><span class="icon-edit"></span>付款</a>&ndash;&gt;
+
+             </div></td>
+         </tr>-->
+        </tbody>
+        <tr>
+            <td colspan="8"><div class="pagelist"> <button class="previous" onclick="previousPage()">上一页</button>
+                <button class="next" onclick="nextPage()">下一页</button></div></td>
+        </tr>
+    </table><br><br>
+
+
+</div>
+<!--<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+    var currentPage=1;
+    var path="/"+location.pathname.split("/")[1];
+    //列表
+    function listorder() {
+        $.get(path+"/order/listOrder",{"currentpage":currentPage},function (data) {
+           console.log(data);
+           if (data.length<5){
+               addAtt();
+           }else{
+               removeAtt();
+           }
+           remove();
+           ad(data);
+        });
+    }
+    //动态添加
+    function ad(data) {
+        $.each(JSON.parse(data),function (i,obj) {
+            $("#tt").append(
+                '<tr>'+
+                '<td>'+obj.oNum+'</td>'+
+                '<td>'+obj.gName+'</td>'+
+                // '<td>'+obj.gImg+'</td>'+
+                '<td>'+obj.gImg+'</td>'+
+                '<td>'+obj.sPrice+'</td>'+
+                '<td>'+obj.sNum+'</td>'+
+                '<td>'+""+'</td>'+
+                '<td>'+obj.oMoney+'</td>'+
+                    '<td>'+
+                '<a class="button border-main"  href="javascript:void(0)" onclick="look('+obj.oId+')">'+
+                '<span class="icon-edit"></span>详情</a>'+
+                '<a class="button border-red" href="javascript:void(0)" onclick="cancle('+obj.oId+')">'+
+                '<span class="icon-trash-o"></span>取消</a>'+
+                '<a class="button border-main"  href="javascript:void(0)" onclick="pay('+obj.oId+')">'+
+                '<span class="icon-edit"></span>付款</a>'+
+                '</td>'+
+                '</tr>'
+
+            )
+        });
+    }-->
+<!--    /*添加*/
+    function addAtt() {
+       var btn=document.getElementsByClassName("next")[0];
+       btn.setAttribute("disabled","disabled");
+    }
+    /*移除*/
+    function removeAtt() {
+        var btn=document.getElementsByClassName("next")[0];
+        btn.removeAttribute("disabled");
+    }
+    /*删除存在的元素*/
+    function remove() {
+        var tb=document.getElementsByClassName("tt")[0];
+        var leng=tb.rows.length;
+        for (var i= 0; i <leng;i++) {
+            tb.deleteRow(0);
+        }
+        //下一页
+        function nextPage(){
+            //让当前页数+1；
+            currentPage++;
+            //请求网络
+            listorders();
+        }
+        //上一页
+        function previousPage(){
+            //1判断currentPage==1;
+            if(currentPage==1)return;
+            //currentPage-1;
+            currentPage--;
+            //网络请求
+            listorders();
+        }
+       function look(oid){
+            window.location.href="";
+        }
+       function cancle(oid){
+            window.location.href="";
+        }
+       function pay(oid){
+            window.location.href="";
+        }
+
+    }
+    /*取消订单*/
+    function deleteOrder() {
+        $.get(path+"/order/deleteOrder",{"oId":oId},function (data) {
+            console.log(data);
+            if (data==1){
+                alert("付款成功");
+            } else{
+                alert("操作失败");
+            }
+
+        });
+    }
+
+
+    /*付款*/
+    function paystateOrder(oId) {
+    $.get(path+"/order/paystateOrder",{"oId":oId},function (data) {
+       console.log(data);
+       if (data==1){
+           alert("付款成功");
+       } else{
+           alert("操作失败");
+       }
+
+    });
+}
+    /*收货*/
+    function okOrder(oId) {
+        $.get(path+"/order/okOrder",{"oId":oId},function (data) {
+            console.log(data);
+            if (data==1){
+                alert("收货成功");
+            } else{
+                alert("操作失败");
+            }
+
+        });
+    }
+
+    /*评价*/
+    function isevaluateOrder(oId) {
+        $.get(path+"/order/isevaluateOrder",{"oId":oId},function (data) {
+            console.log(data);
+            if (data==1){
+                alert("评价成功");
+            } else{
+                alert("操作失败");
+            }
+
+        });
+    }-->
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

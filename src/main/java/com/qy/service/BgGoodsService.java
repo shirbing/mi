@@ -16,6 +16,6 @@ public interface BgGoodsService {
     public boolean lowGoods(GoodsEntity goodsEntity);
     public boolean recommendGoods(GoodsEntity goodsEntity);
     public boolean noRecommedGoods(GoodsEntity goodsEntity);
-    public List<GoodsEntity> findSearchGoods(GoodsEntity goodsEntity,ProductEntity productEntity,int currentPage);
+    public List<GoodsEntity> findSearchGoods(GoodsEntity goodsEntity, ProductEntity productEntity, int currentPage);
     public List<ProductEntity> findPnum();
 }

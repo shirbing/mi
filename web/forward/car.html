@@ -29,7 +29,7 @@
 				});
 				var span_momey = $(".span_momey");
 				var b = 0;
-				for (var i = 0; i < span_momey.length; i++) {
+				for (var i = 0; i< span_momey.length; i++) {
 					b += parseFloat($(span_momey[i]).html());
 				}
 				var out_momey = $(".out_momey");
@@ -77,7 +77,7 @@
 				$(".shade_content").show();
 				$(".shade").show();
 				var input_out = $(".input_style");
-				for (var i = 0; i <= input_out.length; i++) {
+				for (var i = 0; i<= input_out.length; i++) {
 					if ($(input_out[i]).val() != "") {
 						$(input_out[i]).val("");
 					}
@@ -112,7 +112,7 @@
 				var out_momey = $(".out_momey");
 				var input_ = $(b).next();
 				var input_val = $(b).next().val();
-				if (input_val <= 1) {
+				if (input_val<= 1) {
 					alert("商品个数不能小于1！")
 				} else {
 					var input_add = parseInt(input_val) - 1;
@@ -123,243 +123,119 @@
 				}
 			}
 		</script>
+		<style type="text/css">
+			.shopping_content{
+				margin-top: 200px;
+			}
+			/*#first{
+				margin-left:600px;
+			}*/
+		</style>
 	</head>
 
-	<body>
+	<body onload="getList()">
 		
-		<div class="Caddress">
-			<div class="open_new">
-				<button class="open_btn" onclick="javascript:onclick_open();">使用新地址</button>
-			</div>
-			<div class="add_mi">
-				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
-			</div>
-			<div class="add_mi">
-				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
-			</div>
-			<div class="add_mi">
-				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
-			</div>
-			<div class="add_mi">
-				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
-			</div>
-			<div class="add_mi">
-				<p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-				<p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
-			</div>
-		</div>
 
-		<!--
-        	作者：z@163.com
-        	时间：2016-03-04
-        	描述：商品内容
-        -->
 		<div class="shopping_content">
 			<div class="shopping_table">
 				<table border="1" bordercolor="#cccccc" cellspacing="0" cellpadding="0" style="width: 100%; text-align: center;">
+					<thead>
 					<tr>
 						<th>商品图片</th>
 						<th>商品名称</th>
-						<th>商品属性</th>
-						<th>商品价格</th>
+						<th>商品单价</th>
 						<th>商品数量</th>
+						<th>商品总价</th>
 						<th>商品操作</th>
+
 					</tr>
-					<tr>
-						<td>
-							<a><img src="images/2f1.jpg" /></a>
-						</td>
-						<td><span>小消息下</span></td>
-						<td>
-							<div class="">
-								<span id="">颜色</span>：<span>白色</span>
-							</div>
-							<div class="">
-								<span id="">尺码</span>：<span>L</span>
-							</div>
-						</td>
-						<td>
-							<span class="span_momey">11.10</span>
-						</td>
-						<td>
-							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
-							<input class="momey_input" type="" name="" id="" value="1" disabled="disabled" />
-							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
-						</td>
-						<td>
-							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a><img src="images/2f1.jpg" /></a>
-						</td>
-						<td><span>小消息下</span></td>
-						<td>
-							<div class="">
-								<span id="">颜色</span>：<span>白色</span>
-							</div>
-							<div class="">
-								<span id="">尺码</span>：<span>L</span>
-							</div>
-						</td>
-						<td>
-							<span class="span_momey">11.10</span>
-						</td>
-						<td>
-							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
-							<input class="momey_input" type="" name="" id="" value="1"  disabled="disabled"/>
-							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
-						</td>
-						<td>
-							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a><img src="images/2f1.jpg" /></a>
-						</td>
-						<td><span>小消息下</span></td>
-						<td>
-							<div class="">
-								<span id="">颜色</span>：<span>白色</span>
-							</div>
-							<div class="">
-								<span id="">尺码</span>：<span>L</span>
-							</div>
-						</td>
-						<td>
-							<span class="span_momey">11.10</span>
-						</td>
-						<td>
-							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
-							<input class="momey_input" type="" name="" id="" value="1"  disabled="disabled"/>
-							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
-						</td>
-						<td>
-							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a><img src="images/2f1.jpg" /></a>
-						</td>
-						<td><span>小消息下</span></td>
-						<td>
-							<div class="">
-								<span id="">颜色</span>：<span>白色</span>
-							</div>
-							<div class="">
-								<span id="">尺码</span>：<span>L</span>
-							</div>
-						</td>
-						<td>
-							<span class="span_momey">11.10</span>
-						</td>
-						<td>
-							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
-							<input class="momey_input" type="" name="" id="" value="1" disabled="disabled" />
-							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
-						</td>
-						<td>
-							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a><img src="images/2f1.jpg" /></a>
-						</td>
-						<td><span>小消息下</span></td>
-						<td>
-							<div class="">
-								<span id="">颜色</span>：<span>白色</span>
-							</div>
-							<div class="">
-								<span id="">尺码</span>：<span>L</span>
-							</div>
-						</td>
-						<td>
-							<span class="span_momey">11.00</span>
-						</td>
-						<td>
-							<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
-							<input class="momey_input" type="" name="" id="" value="1"  disabled="disabled"/>
-							<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
-						</td>
-						<td>
-							<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>
-						</td>
-					</tr>
+					</thead>
+
+					<tbody class="tt">
+
+					</tbody>
 				</table>
 				<div class="" style="width: 100%; text-align: right; margin-top: 10px;">
 					<div class="div_outMumey" style="float: left;">
-						总价：<span class="out_momey">11</span>
+						总价：<span class="out_momey" id="zgs"></span>
 					</div>
-					<button class="btn_closing" onclick="">结算</button>
+					<button class="btn_closing" onclick="s()">结算</button>
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript">
 
 
-		<div class="shade">
-		</div>
+            //获取当前表格对象
+            var tb=document.getElementsByClassName("tt")[0];
+            //删除当前已经存在的元素
+            function remove(){
+                var leng=tb.rows.length;
+                for (var i= 0; i <leng;i++) {
+                    tb.deleteRow(0);
+                }
+            }
+            var sum=0;
+            //向table添加元素
+            function addElement(obj) {
+                for (var i = 0; i<obj.length; i++) {
+                    $(".tt").append('<tr>' +
+						'<td width="10%"><img src='+obj[i].sIcon+' alt="商品图片" width="70" height="50" /></td>' +
+                        '<td>' + obj[i].sName + '</td>' +
+                        '<td>' + obj[i].sPrice + '</td>' +
+                        '<td>' + obj[i].sNum+ '</td>' +
+                        '<td>' + obj[i].sSumprice + '</td>' +
+                        '<td>'+ '<button class="btn_r" onclick="cancle('+obj[i].sId+')">删除</button>'+ '</td>' +
+                        '</tr>'
+                    );
+                    sum+=obj[i].sSumprice;
+                }
+                //alert(sum);
+                $("#zgs").html(sum);
+                if(obj==null){
+                    $(".tt").append( "<tr style='text-align: center'>"
+                        +"<td colspan='7'><font color='#cd0a0a'>"+ 暂无记录 + "</font></td>"
+                        +"</tr>");
+                }
+            }
+            //删除成功
+            function cancle(i){
+               // alert(i);
+                var path = "/" + location.pathname.split("/")[1];
+                $(function(){
+                    $.get(path+"/shop/delete",{"sId":i},function(data){
+                        if(data=="true"){
+                            alert("删除成功");
+                            window.location.href="car.html";
+                        }
+                    },"json");
+                })
+            }
+            //获取当前信息
+            function getList(){
+                var path = "/" + location.pathname.split("/")[1];
+                $(function(){
+                    $.get(path+"/shop/search",{},function(data){
+                        addElement(data);
+                    },"json");
+                })
+            }
 
-		<div class="shade_content">
-			<div class="col-xs-12 shade_colse">
-				<button onclick="javascript:onclick_close();">x</button>
-			</div>
-			<div class="nav shade_content_div">
-				<div class="col-xs-12 shade_title">
-					新增收货地址
-				</div>
-				<div class="col-xs-12 shade_from">
-					<form action="" method="post">
-						<div class="col-xs-12">
-							<span class="span_style" id="">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</span>
-							<input class="input_style" type="" name="" id="region" value="" placeholder="&nbsp;&nbsp;请输入您的所在地区" />
-						</div>
-						<div class="col-xs-12">
-							<span class="span_style" id="">详细地址</span>
-							<input class="input_style" type="" name="" id="address" value="" placeholder="&nbsp;&nbsp;请输入您的详细地址" />
-						</div>
-						<div class="col-xs-12">
-							<span class="span_style" id="">邮政编号</span>
-							<input class="input_style" type="" name="" id="number_this" value="" placeholder="&nbsp;&nbsp;请输入您的邮政编号" />
-						</div>
-						<div class="col-xs-12">
-							<span class="span_style" class="span_sty" id="">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span>
-							<input class="input_style" type="" name="" id="name_" value="" placeholder="&nbsp;&nbsp;请输入您的姓名" />
-						</div>
-						<div class="col-xs-12">
-							<span class="span_style" id="">手机号码</span>
-							<input class="input_style" type="" name="" id="phone" value="" placeholder="&nbsp;&nbsp;请输入您的手机号码" />
-						</div>
-						<div class="col-xs-12">
-							<input class="btn_remove" type="button" id="" onclick="javascript:onclick_close();" value="取消" />
-							<input type="submit" class="sub_set" id="sub_setID" value="提交" />
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+            //结算，当点击结算时，跳转到订单界面
+            function s() {
+                var path = "/" + location.pathname.split("/")[1];
+                $.get(path+"/order/saveOrder",{},function(data){
+                    if(data==1){
+                        alert("您的购物车里没有商品,先选几件再过来点结算吧");
+                    }else{
+                        alert("正在生成订单...");
+                        window.location.href="unpaymoney.html";
 
-		<!-- 底部开始 -->
-		<div id="down">
-			<div class="down_top">
-				
-			</div>
-			<div class="down_center">
-				
-			</div>
-			<div class="down_bot">
-				
-			</div>
-		</div>
-		<!-- 底部结束 -->
+					}
+                },"json");
+
+            }
+		</script>
 	</body>
 
 </html>

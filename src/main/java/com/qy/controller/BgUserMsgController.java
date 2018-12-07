@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-public class UserMsgController {
+public class BgUserMsgController {
     @Autowired
     @Qualifier(value = "bgUserMsgService")
     private BgUserMsgService bgUserMsgService;
