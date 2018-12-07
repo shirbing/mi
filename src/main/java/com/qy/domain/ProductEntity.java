@@ -5,7 +5,9 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "product", schema = "secondproject", catalog = "")
+
+@Table(name = "product", schema = "secondproject")
+
 @DynamicInsert(value = true)
 public class ProductEntity {
     private int pId;
@@ -88,7 +90,9 @@ public class ProductEntity {
     }
 
     @Basic
-    @Column(name = "P_unit")
+
+    @Column(name = "p_unit")
+
     public String getpUnit() {
         return pUnit;
     }

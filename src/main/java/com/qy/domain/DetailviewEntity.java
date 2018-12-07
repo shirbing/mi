@@ -6,7 +6,9 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "detailview", schema = "secondproject", catalog = "")
+
+@Table(name = "detailview", schema = "secondproject")
+
 @DynamicInsert(value = true)
 public class DetailviewEntity {
     private int oId;
@@ -14,7 +16,9 @@ public class DetailviewEntity {
     private String uName;
     private String gNum;
     private double oMoney;
-    private double oPost;
+
+    private Double oPost;
+
     private String oMsg;
     private String oPaystate;
     private String oSendstate;
@@ -84,11 +88,13 @@ public class DetailviewEntity {
 
     @Basic
     @Column(name = "o_post")
-    public double getoPost() {
+
+    public Double getoPost() {
         return oPost;
     }
 
-    public void setoPost(double oPost) {
+    public void setoPost(Double oPost) {
+
         this.oPost = oPost;
     }
 
@@ -261,10 +267,12 @@ public class DetailviewEntity {
 
         if (oId != that.oId) return false;
         if (Double.compare(that.oMoney, oMoney) != 0) return false;
-        if (Double.compare(that.oPost, oPost) != 0) return false;
+
         if (oNum != null ? !oNum.equals(that.oNum) : that.oNum != null) return false;
         if (uName != null ? !uName.equals(that.uName) : that.uName != null) return false;
         if (gNum != null ? !gNum.equals(that.gNum) : that.gNum != null) return false;
+        if (oPost != null ? !oPost.equals(that.oPost) : that.oPost != null) return false;
+
         if (oMsg != null ? !oMsg.equals(that.oMsg) : that.oMsg != null) return false;
         if (oPaystate != null ? !oPaystate.equals(that.oPaystate) : that.oPaystate != null) return false;
         if (oSendstate != null ? !oSendstate.equals(that.oSendstate) : that.oSendstate != null) return false;
@@ -295,8 +303,9 @@ public class DetailviewEntity {
         result = 31 * result + (gNum != null ? gNum.hashCode() : 0);
         temp = Double.doubleToLongBits(oMoney);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(oPost);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+
+        result = 31 * result + (oPost != null ? oPost.hashCode() : 0);
+
         result = 31 * result + (oMsg != null ? oMsg.hashCode() : 0);
         result = 31 * result + (oPaystate != null ? oPaystate.hashCode() : 0);
         result = 31 * result + (oSendstate != null ? oSendstate.hashCode() : 0);

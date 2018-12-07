@@ -14,6 +14,7 @@ public class EvaluationEntity  {
     private int eId;
     private String gNum;
     private String oNum;
+
     /*private OrdersEntity ordersEntity;*/
     private UserEntity userEntity;
     /*private int uId; */
@@ -45,6 +46,7 @@ public class EvaluationEntity  {
         this.userEntity = userEntity;
     }
 
+
     @Id
     @Column(name = "e_id")
     public int geteId() {
@@ -64,6 +66,7 @@ public class EvaluationEntity  {
     public void setgNum(String gNum) {
         this.gNum = gNum;
     }
+
 
     @Basic
     @Column(name = "o_num")
@@ -132,9 +135,11 @@ public class EvaluationEntity  {
         EvaluationEntity that = (EvaluationEntity) o;
 
         if (eId != that.eId) return false;
+
         /*if (uId != that.uId) return false;*/
         if (gNum != null ? !gNum.equals(that.gNum) : that.gNum != null) return false;
         /*if (oNum != null ? !oNum.equals(that.oNum) : that.oNum != null) return false;*/
+
         if (eStar != null ? !eStar.equals(that.eStar) : that.eStar != null) return false;
         if (eEval != null ? !eEval.equals(that.eEval) : that.eEval != null) return false;
         if (eTime != null ? !eTime.equals(that.eTime) : that.eTime != null) return false;
@@ -147,8 +152,10 @@ public class EvaluationEntity  {
     public int hashCode() {
         int result = eId;
         result = 31 * result + (gNum != null ? gNum.hashCode() : 0);
+
        /* result = 31 * result + (oNum != null ? oNum.hashCode() : 0);*/
        /* result = 31 * result + uId;*/
+
         result = 31 * result + (eStar != null ? eStar.hashCode() : 0);
         result = 31 * result + (eEval != null ? eEval.hashCode() : 0);
         result = 31 * result + (eTime != null ? eTime.hashCode() : 0);

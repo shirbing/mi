@@ -11,14 +11,14 @@
         <mapping class="com.qy.domain.EvaluationEntity"/>
         <mapping class="com.qy.domain.GetgoodEntity"/>
         <mapping class="com.qy.domain.GoodsEntity"/>
-        <mapping class="com.qy.domain.OrderEntity"/>
+        <mapping class="com.qy.domain.LogisticsEntity"/>
+        <mapping class="com.qy.domain.OrdersEntity"/>
         <mapping class="com.qy.domain.ProductEntity"/>
+        <mapping class="com.qy.domain.ShopcarEntity"/>
         <mapping class="com.qy.domain.TradeEntity"/>
         <mapping class="com.qy.domain.UnitEntity"/>
         <mapping class="com.qy.domain.UserEntity"/>
-        <mapping class="com.qy.domain.OrdersEntity"/>
-        <mapping class="com.qy.domain.LogisticsEntity"/>
-        <mapping class="com.qy.domain.ShopcarEntity"/>
+
         <mapping class="com.qy.domain.DetailviewEntity"/>
 
         <!-- <property name="connection.username"/> -->

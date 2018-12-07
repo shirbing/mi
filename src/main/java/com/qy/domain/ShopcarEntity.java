@@ -5,14 +5,18 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "shopcar", schema = "secondproject", catalog = "")
+
+@Table(name = "shopcar", schema = "secondproject")
+
 @DynamicInsert(value = true)
 public class ShopcarEntity {
     private int sId;
     private String sName;
     private String sIcon;
     private double sPrice;
+
     private Integer sNum;
+
     private double sSumprice;
     private String uName;
     private String gNum;
@@ -59,11 +63,13 @@ public class ShopcarEntity {
 
     @Basic
     @Column(name = "s_num")
+
     public Integer getsNum() {
         return sNum;
     }
 
     public void setsNum(Integer sNum) {
+
         this.sNum = sNum;
     }
 

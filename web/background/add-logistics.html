@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        function  add() {
+            var a=GetRequest();
+            // alert("pNum:"+a['pNum']) //打印出传过来的id
+            var ss=a['oId']
+            //$("#num").val(ss);
+            return ss;
+        }
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+        function adds(){
+            var path = "/" + location.pathname.split("/")[1];
+            var oId=add();
+          $.get(path+"/logistics/add", {
+                  "lNum": $("#style").val(),
+                  "lName": $("#name").val(),
+                   "oId":oId
+              },
+              function(data){
+                  if(data=="true") {
+                      alert("添加成功");
+                      window.location.href = "list-order.html";
+                  }
+              },"json");
+        }
+    </script>
+</head>
+<body onload="add()">
+<div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder">新增产品</strong></div>
+    <div class="panel admin-panel margin-top" id="add">
+        <div class="panel-head"><strong><span class="icon-pencil-square-o"></span>添加信息</strong></div>
+        <div class="body-content">
+            <form method="post" class="form-x" action="">
+                <div class="form-group">
+                    <div class="label">
+                        <label>物流号：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w50" name="url" id="style" data-validate="required:请填写产品分类"  />
+                        <div class="tips"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>快递公司：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w50" name="url" id="name" data-validate="required:请填写产品名称"  />
+                        <div class="tips"></div>
+                    </div>
+                </div>
+               <!-- <div class="form-group">
+                    <div class="label">
+                        <label>产品重量：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w50" name="url" id="weight" data-validate="required:请填写产品名称"  />
+                        <div class="tips"></div>
+                    </div>
+                </div>-->
+                <!--<div class="form-group">
+                    <div class="label">
+                        <label>产品编号：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w50" name="url" id="num" data-validate="required:请填写产品名称"  />
+                        <div class="tips"></div>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <div class="label">
+                        <label></label>
+                    </div>
+                    <div class="field">
+                        <button class="button bg-main icon-check-square-o"  id="submit" type="submit" onclick="adds()"> 提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

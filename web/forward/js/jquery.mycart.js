@@ -357,7 +357,7 @@
       var name = $target.data('name');
       var summary = $target.data('summary');
       var price = $target.data('price');
-      alert("---");
+
       var quantity = $target.data('quantity');
       var image = $target.data('image');
       var gNum= $target.data('gnum');

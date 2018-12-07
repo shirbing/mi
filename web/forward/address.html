@@ -1,33 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <!--<script src="js/jquery.js"></script>-->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/pintuer.js"></script>
+    <script type="text/javascript">
+        var currentPage=1;
+        // "ggName":$('#iseat').val(),"ggPhone":$('#isup').val(),"ggAddress":$('#istj').val(),"ggState":$('#goodstype').val()
+        var path="/"+location.pathname.split("/")[1];
+        function listAddress() {
+            $.get(path+"/address/listAddress",
+                {"currentpage":currentPage},
+                function (data) {
+                    console.log(data);
+                    if(data.length<3){
+                        addAtt();
+                    }else{
+                        removeAtt();
+                    }
+                    remove();
+                    ad(data);
+                }
+            );
+        }
+
+        function ad(data) {
+            $.each(JSON.parse(data),function(i,obj){
+
+                    $("#tt").append(
+                        '<tr>'+
+                        '<td>'+obj.ggName+'</td>'+
+                        '<td>'+obj.ggPhone+'</td>'+
+                        // '<td width="10%"><img src='+obj.ggPhone+' alt="商品图片" width="70" height="50" /></td>'+
+                        '<td>'+obj.ggAddress+'</td>'+
+                        '<td>'+obj.ggState+'</td>'+
+                        '<td> ' +
+                        // '<div class="button-group"> <a class="button border-main" href="edit-goods.html?gNum='+obj.ggId+'&pNum='+obj.pNum+'&gName='+obj.gName+'">'+
+                        // '<span class="icon-edit">'+
+                        /*'<a class="button border-main"  href="javascript:void(0)" onclick="updateAddress('+obj.ggId+')">'+
+                        '<span class="icon-edit"></span>编辑</a>'+*/
+                        '<a class="button border-main"  href="javascript:void(0)" onclick="changeState('+obj.ggId+')">'+
+                        '<span class="icon-edit"></span>设为默认地址</a>'+
+                        '<a class="button border-red" href="javascript:void(0)" onclick="deleteAddress('+obj.ggId+')">'+
+                        '<span class="icon-trash-o"></span>删除</a>'+
+                        '</div>'+
+                        '</td>'+
+                        '</tr>');
+
+            });
+        }
+        //改变状态
+        function changeState(ggId) {
+                $.get(
+                    path+"/address/changeState",
+                    {"ggId":ggId},
+                    function (data) {
+                        if(data==1){
+                            alert("设置失败");
+                        }else{
+                            alert("设置成功");
+                            window.location.href="address.html";
+                        }
+
+                    }
+                );
+        }
+        //----------删除-----------------------
+        function deleteAddress(ggId) {
+            $.get(
+                path+"/address/deleteAddress",
+                {"ggId":ggId},
+                function (data) {
+
+                    if(data==1){
+                        alert("删除失败");
+                    }else{
+                        alert("删除成功");
+                        window.location.href="address.html";
+                    }
+                }
+            );
+        }
+        //删除当前已经存在的元素
+        function remove(){
+            var tb=document.getElementsByClassName("tt")[0];
+            var leng=tb.rows.length;
+            for (var i= 0; i <leng;i++) {
+                tb.deleteRow(0);
+            }
+        }
+        //下一页
+        function nextPage(){
+            //让当前页数+1；
+            currentPage++;
+            //请求网络
+            listAddress();
+        }
+        //上一页
+        function previousPage(){
+            //1判断currentPage==1;
+            if(currentPage==1)return;
+            //currentPage-1;
+            currentPage--;
+            //网络请求
+            listAddress();
+        }
+        //添加
+        function addAtt(){
+            var btn=document.getElementsByClassName("next")[0];
+            btn.setAttribute("disabled", "disabled");
+        }
+        //移除
+        function removeAtt(){
+            var btn=document.getElementsByClassName("next")[0];
+            btn.removeAttribute("disabled");
+        }
+
+ /*       function deleteAddress(ggId) {
+            $.get(path+"/address/deleteAddress",{"gNum":ggId},
+                function (data) {
+                    console.log(data);
+                    if(data==1){
+                        window.location.href="goods-operation.html";
+                    }else{
+                        alert("删除失败");
+                    }
+                }
+            );
+        }*/
+
+
+    </script>
 </head>
-<body>
-<div class="Caddress">
-    <div class="open_new">
-        <button class="open_btn" onclick="javascript:onclick_open();">使用新地址</button>
-    </div>
-    <div class="add_mi">
-        <p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-        <p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
-    </div>
-    <div class="add_mi">
-        <p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-        <p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
-    </div>
-    <div class="add_mi">
-        <p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-        <p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
-    </div>
-    <div class="add_mi">
-        <p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-        <p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
-    </div>
-    <div class="add_mi">
-        <p style="border-bottom:1px dashed #ccc;line-height:28px;">浙江杭州(爸爸收)</p>
-        <p>萧山 北干 明怡花苑53幢3单元 13735683918</p>
+<body onload="listAddress()">
+<div id="listform">
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder">管理收货地址</strong></div>
+        <div class="padding border-bottom">
+            <ul class="search" style="padding-left:10px;">
+                <li> <a class="button border-main icon-plus-square-o" href="add-address.html">新增收货地址</a> </li>
+
+            </ul>
+        </div>
+        <table class="table table-hover text-center">
+            <tr>
+                <th width="8%">收货人姓名</th>
+                <th width="15%">电话</th>
+                <th width="20%">详细地址</th>
+                <th width="10%">默认地址</th>
+
+            </tr>
+            <tbody name="list" class="tt" id="tt">
+            <!--追加内容-->
+            </tbody>
+
+            <tr>
+                <td colspan="8"><div class="pagelist"> <button class="previous" onclick="previousPage()">上一页</button>
+                    <button class="next" onclick="nextPage()">下一页</button></div></td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>

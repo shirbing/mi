@@ -1,0 +1,104 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+    <!--http://libs.baidu.com/jquery/1.11.3/jquery.min.js-->
+<title>支付密码</title>
+<script src="js/jquery.min.js"></script>
+<style>
+.demo {
+	width:462px;
+	margin:30px auto 28px auto;
+	height:62px;
+	position:relative;
+}
+input {
+	width:58px;
+	height:58px;
+	display:inline-block;
+	float:left;
+	margin-left:10px;
+	outline:none;
+	text-align:center;
+	line-height:58px;
+	font-size:35px;
+	font-weight:800;
+	border:1px solid #dddddd;
+}
+.border {
+	border:1px solid #ff7400!important;
+}
+h2 {
+    text-align: center;
+    background-color: #ccc;
+}
+button{
+	width:462px;
+	margin:30px auto 28px auto;
+	height:62px;
+	position:relative;
+	background-color: #66ccff;
+	font-size:20px;
+}
+
+</style>
+</head>
+<body>
+<h2>请输入支付密码</h2>
+<div class="demo" id="demo">
+    <input type="text" class="border" maxlength="1" autofocus="autofocus">
+    <input type="text" maxlength="1" readonly="readonly">
+    <input type="text" maxlength="1" readonly="readonly">
+    <input type="text" maxlength="1" readonly="readonly">
+    <input type="text" maxlength="1" readonly="readonly">
+    <input type="text" maxlength="1" class="lastnum" readonly="readonly">
+   
+   <div><button style="color: white" onclick="paymoney()">确认付款</button></div> 
+</div>
+
+<script>
+onload = function onload() {
+    var wrap = document.getElementById("demo");
+    var txts = wrap.getElementsByTagName("input");
+    for (var i = 0; i < txts.length; i++) {
+        var t = txts[i];
+        t.index = i;
+        t.setAttribute("readonly", "readonly");
+        t.onkeyup = function(event) {
+            this.value = this.value.replace(/\D/g, '');
+            var event = event || window.event;
+            if (event.keyCode == 8) {
+                this.value = "";
+                var next = this.index - 1;
+                var last = this.index;
+                if (next < 0) return;
+                txts[next].removeAttribute("readonly");
+                txts[next].focus();
+                txts[last].setAttribute("readonly", "readonly");
+                txts[next].className = "border";
+                txts[last].classList.remove("border");
+            } else {
+                if (this.value == "") {
+                    return false;
+                }
+                var next = this.index + 1;
+                var last = this.index;
+                if (next > txts.length - 1) return;
+                txts[next].removeAttribute("readonly");
+                txts[next].focus();
+                txts[last].setAttribute("readonly", "readonly");
+                txts[next].className = "border";
+                txts[last].classList.remove("border");
+            }
+        };
+    }
+    txts[0].removeAttribute("readonly");
+}
+function paymoney(){
+    window.location.href="ungetproject.html";
+}
+
+</script>
+
+</body>
+</html>

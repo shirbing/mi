@@ -14,6 +14,6 @@ public interface BgAdminLoginDao {
     public boolean isOldPwd(HttpServletRequest request,String newpwd);
     public boolean isOkPwd(String newpwd,String repwd,HttpServletRequest request);
     //    修改管理员个人信息
-    public boolean changeaMsg(AdminEntity adminEntity,HttpServletRequest request);
+    public boolean changeaMsg(AdminEntity adminEntity, HttpServletRequest request);
 
 }

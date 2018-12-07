@@ -18,66 +18,118 @@
         }
 
     </style>
+    <script type="text/javascript">
+        function  add() {
+            var a=GetRequest();
+            var path = "/" + location.pathname.split("/")[1];
+            $.get(path+"/bgorder/find",{"oId":a['oId']},function (data) {
+                addElement(data);
+                //alert(data[0].gNum);
+            },"json");
+        }
+        //向table添加元素
+       function addElement(obj) {
+            for (var i = 0; i < obj.length; i++) {
+                $(".tt").append(
+                    '<tr>' +
+                    '<td>' + obj[i].gNum + '</td>' +
+                    '<td width="10%"><img src='+obj[i].sIcon+' alt="商品图片" width="70" height="50" /></td>'+
+                  /*  '<td>' + obj[i].sIcon + '</td>' +*/
+                    '<td>' + obj[i].sName + '</td>' +
+                    '<td>' + obj[i].lName + '</td>' +
+                    '<td>' + obj[i].sNum + '</td>' +
+                    '<td>' + obj[i].sPrice + '</td>' +
+                    '<td>' + '<a class="button border-red" onclick="setValues()"> <span class="icon-edit"></span>返回</a>' + '</td>' +
+                    '</tr>'
+                );
+                $("#first").html(obj[i].oNum);
+                $("#second").html(obj[i].uName);
+                $("#third").html(obj[i].sSumprice);
+                $("#forth").html(obj[i].sSumprice);
+                $("#five").html(obj[i].oPost);
+                $("#sixth").html(obj[i].oMsg);
+                $("#seven").html(obj[i].ggName);
+                $("#eight").html(obj[i].ggPhone);
+                $("#nine").html(obj[i].ggAddress);
+                $("#ten").html(new Date(parseInt(obj[i].lTime)).toLocaleString().replace(/:\d{1,2}$/,' '));
+            }
+        }
+        //返回事件
+        function setValues() {
+            window.location.href="list-order.html";
+        }
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+    </script>
 </head>
-<body>
+<body onload="add()">
     <div class="panel admin-panel">
         <div class="panel-head"><strong class="icon-reorder">订单详情</strong></div>
         <div class="labelsss">
-            <label>订单号：</label><span class="ddh"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>待付款</span>
+            <label>订单号：</label><span class="ddh" id="first"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <div class="labelsss">
-            <label>用户账号：</label><span class="yhzh"></span>
+            <label>用户账号：</label><span class="yhzh" id="second"></span>
         </div><br>
         <table class="table table-hover text-center">
             <tr>
                 <th width="12%">商品编号</th>
-                <th width="14%">封面</th>
-                <th width="14%">商品名称</th>
-                <th width="12%">商品属性</th>
-                <th width="12%">数量</th>
-                <th width="12%">原价</th>
-                <th width="12%">特价</th>
-                <th width="12%">订单金额</th>
+                <th width="18%">商品图片</th>
+                <th width="16%">商品名称</th>
+                <th width="13%">快递</th>
+                <th width="13%">数量</th>
+                <th width="13%">单价</th>
+                <th width="12%">操作</th>
             </tr>
-            <tbody name="list" id="tt">
-            <tr>
+            <tbody name="list" id="tt" class="tt">
+            <!--<tr>
                 <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
                 <td width="10%"><img src="images/11.jpg" alt="" width="70" height="50" /></td>
                 <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
                 <td><font color="#00CC99">首页</font></td>
                 <td>2016-07-01</td>
                 <td> </td>
-                <td> </td>
+                &lt;!&ndash;<td> </td>&ndash;&gt;
                 <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span>解除</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span>禁用</a> </div></td>
-            </tr>
+            </tr>-->
             </tbody>
         </table><br><br>
-        <div class="labelsss">
+        <!--<div class="labelsss">
             <label>合计数量：</label><span class="hjsl"></span>
+        </div>-->
+        <div class="labelsss">
+            <label>订单金额：</label><span class="ddje" id="third"></span>
         </div>
         <div class="labelsss">
-            <label>订单金额：</label><span class="ddje"></span>
+            <label>应付金额：</label><span class="jfje" id="forth"></span>
         </div>
         <div class="labelsss">
-            <label>应付金额：</label><span class="jfje"></span>
+            <label>运费：</label><span class="yf" id="five"></span>
         </div>
         <div class="labelsss">
-            <label>运费：</label><span class="yf"></span>
+            <label>买家留言：</label><span class="mjly" id="sixth"></span>
         </div>
         <div class="labelsss">
-            <label>买家留言：</label><span class="mjly"></span>
+            <label>收货人：</label><span class="shr" id="seven"></span>
         </div>
         <div class="labelsss">
-            <label>收货人：</label><span class="shr"></span>
+            <label>联系方式：</label><span class="lxfs" id="eight"></span>
         </div>
         <div class="labelsss">
-            <label>联系方式：</label><span class="lxfs"></span>
+            <label>收货地址：</label><span class="shdz" id="nine"></span>
         </div>
         <div class="labelsss">
-            <label>收货地址：</label><span class="shdz"></span>
-        </div>
-        <div class="labelsss">
-            <label>提交时间：</label><span class="tjsj"></span>
+            <label>提交时间：</label><span class="tjsj" id="ten"></span>
         </div>
 
     </div>

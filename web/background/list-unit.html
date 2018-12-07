@@ -10,8 +10,13 @@
     <link rel="stylesheet" href="css/admin.css">
     <script src="js/jquery.js"></script>
     <script src="js/pintuer.js"></script>
+    <style type="text/css">
+        #first{
+            margin-left: 600px;
+        }
+    </style>
 </head>
-<body>
+<body onload="getList()">
     <div class="panel admin-panel">
         <div class="panel-head"><strong class="icon-reorder">单位管理</strong></div>
         <div class="padding border-bottom">
@@ -25,18 +30,124 @@
                         <th width="25%">最小增量</th>
                         <th width="25%">操作</th>
                     </tr>
-                    <tbody name="list" id="tt">
-                    <tr>
+                    <tbody name="list" class="tt" id="tt">
+                    <!--<tr>
                         <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
                         <td width="10%"><img src="images/11.jpg" alt="" width="70" height="50" /></td>
                         <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
                         <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span>解除</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span>禁用</a> </div></td>
-                    </tr>
+                    </tr>-->
                     </tbody>
                  </table>
             </ul>
         </div>
          </div>
     </div>
+    <div id="first">
+        <button class="previous" onclick="previousPage()">上一页</button>
+        <button class="next" onclick="nextPage()">下一页</button>
+    </div>
+    <script>
+        //声明一个变量 表示当前页数
+        var currentPage=1;
+        //var order="";//搜索姓名
+
+        //获取当前表格对象
+        var tb=document.getElementsByClassName("tt")[0];
+
+        //删除当前已经存在的元素
+        function remove(){
+            var leng=tb.rows.length;
+            for (var i= 0; i <leng;i++) {
+                tb.deleteRow(0);
+            }
+        }
+        //向table添加元素
+        function addElement(obj) {
+            for (var i = 0; i < obj.length; i++) {
+                $(".tt").append(
+                    '<tr>' +
+                    '<td>' + obj[i].uId + '</td>' +
+                    '<td>' + obj[i].uName + '</td>' +
+                    '<td>' + obj[i].uValue + '</td>' +
+                   '<td>' +  '<a class="button border-red" onclick="setValues('+obj[i].uId+')"> <span class="icon-edit"></span>删除</a>'+ '</td>' +
+                    '</tr>'
+                );
+            }
+            if(obj==null){
+                $(".tt").append( "<tr style='text-align: center'>"
+                    +"<td colspan='6'><font color='#cd0a0a'>"+ 暂无记录 + "</font></td>"
+                    +"</tr>");
+            }
+        }
+        //删除
+        function setValues(i) {
+            //alert(i);
+            var path = "/" + location.pathname.split("/")[1];
+            getparameter();
+            $(function(){
+                $.get(path+"/unit/delete",{"uId":i},
+                    function(data){
+                        if(data=="true") {
+                            alert("删除成功");
+                            window.location.href = "list-unit.html";
+                        }
+                },"json");
+
+            })
+        }
+        //添加
+        function addAtt(){
+            var btn=document.getElementsByClassName("next")[0];
+            btn.setAttribute("disabled", "disabled");
+        }
+        //移除
+        function removeAtt(){
+            var btn=document.getElementsByClassName("next")[0];
+            btn.removeAttribute("disabled");
+        }
+        //获取参数
+        function getparameter(){
+            /*   order= $("input [type='text'],[class='name']").val();*/
+
+        }
+        //获取当前信息
+        function getList(){
+            var path = "/" + location.pathname.split("/")[1];
+            getparameter();
+            $(function(){
+                $.get(path+"/unit/list",{"page":currentPage},function(data){
+                   //alert(data);
+                    var len=data.length;
+                    if(len<3){
+                        addAtt();
+                    }else {
+                        removeAtt();
+                    }
+                    remove();
+                    addElement(data);
+                    //alert(data[0].name);
+                },"json");
+            })
+        }
+
+        //下一页
+        function nextPage(){
+            //让当前页数+1；
+            currentPage++;
+            //请求网络
+            getList();
+        }
+
+        function previousPage(){
+            //1判断currentPage==1;
+            if(currentPage==1)return;
+            //currentPage-1;
+            currentPage--;
+            //网络请求
+            getList();
+        }
+
+    </script>
 </body>
 </html>

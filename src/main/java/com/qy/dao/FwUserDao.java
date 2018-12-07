@@ -7,6 +7,8 @@ public interface FwUserDao {
     public boolean userNameIsExist(UserEntity userEntity);
     public boolean saveUser(UserEntity userEntity);
     public boolean isState(UserEntity userEntity);
+
     public boolean updateUser(UserEntity userEntity,UserEntity userEntity1);
     public UserEntity personInfo(UserEntity userEntity);
+
 }
